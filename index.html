@@ -1,13 +1,115 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Plan Every Day</title>
+<link rel="stylesheet" type="text/css" href="./css/semantic.css" />
+<link rel="stylesheet" type="text/css" href="./css/calendar.css">
+<script>
+  window.$ = window.jQuery = require("./js/jquery-2.2.1.js");
+</script>
+<script type="text/javascript" src="./js/semantic.js"></script>
+<script type="text/javascript" src="./js/calendar.js"></script>
+<script type="text/javascript" src="./js/datePicker.js"></script>
+<style>
+  *{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  }
+</style>
+</head>
+<body>
+  <div style="width:100%; min-width:1000px; height:100%;padding:50px;">
+  <div style="float:left; width:30%; height:100%;">
+    <div id="date_picker"></div>
+    <div class="ui action input">
+      <input placeholder="搜索..." type="text">
+      <button class="ui icon button">
+        <i class="search icon"></i>
+      </button>
+    </div>
+    <div class="ui segment">
+      <div class="ui relaxed animated  divided list middle aligned selection">
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年1月1日计划安排</div>
+            <div class="description">创建日期:2016-01-01</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第1周计划安排</div>
+            <div class="description">创建日期:2016-01-01</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第2周计划安排</div>
+            <div class="description">创建日期:2016-01-15</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第3周计划安排</div>
+            <div class="description">创建日期:2016-02-02</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="float:left; width:70%; height:100%;text-align:center;">
+    <div class="ui card" style="width:80%;height:80%;margin:auto;">
+      <div class="content" style="width:80%;max-height:10%;">
+        <div class="header">2016年第1周计划安排</div>
+      </div>
+      <div class="content" style="width:80%;max-height:60%;">
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>复习本周的功课</td>
+              <td>完成</td>
+              <td>Edit</td>
+            </tr>
+            <tr>
+              <td>做完本周所有布置的作业</td>
+              <td>待完成</td>
+              <td>Edit</td>
+            </tr>
+            <tr>
+              <td>学习新的功课</td>
+              <td>待完成</td>
+              <td>Edit</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr><th>3个 任务</th>
+            <th>1个 已完成</th>
+            <th></th>
+          </tr></tfoot>
+        </table>
+      </div>
+      <div class="extra content" style="max-height:10%;">
+        <button class="ui button">删除所有</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 </html>
