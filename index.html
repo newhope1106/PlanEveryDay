@@ -15,24 +15,41 @@
   *{
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
   }
+
+  .icon_calendar:before {
+    content: "\f073";
+  }
+
+  .icon_calendar.outline:before {
+    content: "\f133";
+  }
 </style>
 </head>
 <body>
   <div style="width:100%; min-width:1000px; height:100%;padding:50px;">
-  <div style="float:left; width:30%; height:100%;">
-    <div id="date_picker"></div>
-    <div class="ui action input">
-      <input placeholder="搜索..." type="text">
-      <button class="ui icon button">
-        <i class="search icon"></i>
+  <div style="float:left; width:30%; height:100%;text-align:center;">
+    <div class="ui action input" style="width:100%;">
+      <input placeholder="搜索..." type="text" style="width:80%;">
+      <button class="ui icon button" style="width:20%;text-align:center;">
+        <i class="search icon" style="margin:auto;"></i>
       </button>
     </div>
-    <div class="ui segment">
+    <div class="some-wrapping-div" style="margin:10px auto;">
+      <button class="ui icon button" id="view_special_date_plan">
+        <i class="icon_calendar icon"></i>选择日期
+      </button>
+      <label class="ui label" style="font-size:16px;display:none;" id="date_label_container">
+        <label id="date_label">2016-01-01</label>
+        <i class="delete icon" id="label_delete"></i>
+      </label>
+    </div>
+    <div id="date_picker" style="min-width:300px;min-height:300px;" class="ui custom popup center bottom transition hidden"></div>
+    <div class="ui segment" style="min-height:350px;max-height:80%;overflow-y:scroll;overflow-x:hidden;text-align:left;">
       <div class="ui relaxed animated  divided list middle aligned selection">
         <div class="item">
           <i class="file icon"></i>
           <div class="content">
-            <div class="header">2016年1月1日计划安排</div>
+            <div class="header">2016年1月1日计划安排,然后呢</div>
             <div class="description">创建日期:2016-01-01</div>
           </div>
         </div>
@@ -64,6 +81,132 @@
             <div class="description">创建日期:2016-03-03</div>
           </div>
         </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-04</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-06</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-03</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="file icon"></i>
+          <div class="content">
+            <div class="header">2016年第4周计划安排</div>
+            <div class="description">创建日期:2016-03-018</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -83,17 +226,32 @@
           </thead>
           <tbody>
             <tr>
-              <td>复习本周的功课</td>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>复习本周的功课</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition visible">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
               <td>完成</td>
               <td>Edit</td>
             </tr>
             <tr>
-              <td>做完本周所有布置的作业</td>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>做完本周所有布置的作业</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
               <td>待完成</td>
               <td>Edit</td>
             </tr>
             <tr>
-              <td>学习新的功课</td>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>学习新的功课</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
               <td>待完成</td>
               <td>Edit</td>
             </tr>
@@ -106,7 +264,7 @@
         </table>
       </div>
       <div class="extra content" style="max-height:10%;">
-        <button class="ui button">删除所有</button>
+        <button class="ui button google plus ">删除所有</button>
       </div>
     </div>
   </div>

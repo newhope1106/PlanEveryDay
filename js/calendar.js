@@ -634,7 +634,7 @@
         },
         showLabel: function(event, view, date, data) {
             var $lbl = this.$label;
-            
+
             $lbl.find('p').html(this.options.label.repeat({
                 m: view,
                 d: date.format(this.options.format),
