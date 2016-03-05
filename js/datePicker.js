@@ -57,6 +57,8 @@ $(document).ready(function(){
         var day = date.getDate();
         $("#date_label").html(year + '-' + (month<10?'0'+ month:''+month) + '-' +  (day<10?'0'+ day:''+day));
         $("#date_label_container").css("display", "inline");
+
+        $("#view_special_date_plan").popup('hide');
       },
       onClose: function (view, date, data) {
            console.log('event: onClose')
