@@ -1883,7 +1883,7 @@ Toolbar = (function(superClass) {
   };
 
   Toolbar.prototype._tpl = {
-    wrapper: '<div class="simditor-toolbar" style="width:100%;"><ul></ul></div>',
+    wrapper: '<div class="simditor-toolbar"><ul></ul></div>',
     separator: '<li><span class="separator"></span></li>'
   };
 
