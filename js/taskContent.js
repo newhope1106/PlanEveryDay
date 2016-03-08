@@ -24,4 +24,5 @@ function translateToEditTask() {
   $("#new_or_save_task_btn").text("保存任务");
   $("#tab_group").children("div.active").removeClass("active");
   $("#task_edit_tab").addClass("active");
+  initializeEditorIfNeeded();
 }

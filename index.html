@@ -5,6 +5,8 @@
 <title>Plan Every Day</title>
 <link rel="stylesheet" type="text/css" href="./css/semantic.css" />
 <link rel="stylesheet" type="text/css" href="./css/calendar.css">
+
+<link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
 <script>
   window.$ = window.jQuery = require("jquery");
 </script>
@@ -14,6 +16,12 @@
 <script type="text/javascript" src="./js/menu.js"></script>
 <script type="text/javascript" src="./js/taskTitle.js"></script>
 <script type="text/javascript" src="./js/taskContent.js"></script>
+<script type="text/javascript" src="./js/taskEdit.js"></script>
+
+<script type="text/javascript" src="simditor/scripts/module.js"></script>
+<script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="simditor/scripts/simditor.js"></script>
 <style>
   *{
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -25,6 +33,11 @@
 
   .icon_calendar.outline:before {
     content: "\f133";
+  }
+
+  #editor{
+    width: 100%;
+    text-align: left;
   }
 </style>
 </head>
@@ -152,7 +165,11 @@
             </tr></tfoot>
           </table>
         </div>
-        <div class="ui bottom attached tab segment" id="task_edit_tab">task edit </div>
+        <div class="ui bottom attached tab segment" id="task_edit_tab">
+          <div id="editor">
+            <textarea id="task_editor" placeholder="Balabala" autofocus></textarea>
+          </div>
+        </div>
         <div class="ui bottom attached tab segment" id="task_none_tab">none task </div>
       </div>
       <div class="extra content" style="max-height:10%;">
