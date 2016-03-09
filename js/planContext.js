@@ -1,5 +1,6 @@
 $(document).ready(function(){
   attachContextEvent("#plan_list", "plan");
+  attachContextEvent("#list_items_container>div", "task");
 });
 
 function attachContextEvent(nodeId, type) {
@@ -20,6 +21,7 @@ function attachContextEvent(nodeId, type) {
         text: '新建任务',
         action: function(e){
   				alert("create a task");
+          console.log(e);
   			}
       },
   	  {
