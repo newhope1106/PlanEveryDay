@@ -1,31 +1,35 @@
 $(document).ready(function(){
-  $("#new_or_save_task_btn").click(function(){
-    var value = $("#new_or_save_task_btn").text();
-    if (value == "新建任务") {
-      translateToEditTask();
-    } else if(value == "保存任务"){
-      translateToViewTask();
-    }
-  });
+  // $("#task_modal").modal({
+  //   onVisible:function(){
+  //
+  //   }
+  // });
 });
 
-function translateToEmptyTask(){
-  $("#tab_group").children("div.active").removeClass("active");
-  $("#task_none_tab").addClass("active");
-  $("#save_all_btn").css("display", "none");
-}
+function showTaskPopup(header, title, content, taskId) {
+  if(header != null) {
+    $("#task_header_name").text(header);
+  }
 
-function translateToViewTask() {
-  $("#new_or_save_task_btn").text("新建任务");
-  $("#tab_group").children("div.active").removeClass("active");
-  $("#task_view_tab").addClass("active");
-  $("#save_all_btn").css("display", "none");
-}
+  if (title != null) {
+    $("#task_title").val(title);
+  } else {
+    $("#task_title").val("");
+  }
 
-function translateToEditTask() {
-  $("#new_or_save_task_btn").text("保存任务");
-  $("#save_all_btn").css("display", "inline");
-  $("#tab_group").children("div.active").removeClass("active");
-  $("#task_edit_tab").addClass("active");
+  if (content != null) {
+    $("#task_editor").val(content);
+  } else {
+    $("#task_editor").val("");
+  }
+
+  if (typeof(taskId) == "number") {
+    $("#task_id_input").val(taskId);
+  } else {
+    $("#task_id_input").val(-1);
+  }
+
+  $("#task_modal").modal('setting', 'closable', false).modal('show').modal();
+
   initializeEditorIfNeeded();
 }

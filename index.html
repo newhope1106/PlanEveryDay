@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Plan Every Day</title>
 <link rel="stylesheet" type="text/css" href="./css/semantic.css" />
-<link rel="stylesheet" type="text/css" href="./css/calendar.css">
+<link rel="stylesheet" type="text/css" href="./css/calendar.css" />
+<link rel="stylesheet" type="text/css" href="./css/toast.css" />
 
 <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
 <script>
@@ -17,6 +18,7 @@
 <script type="text/javascript" src="./js/taskTitle.js"></script>
 <script type="text/javascript" src="./js/taskContent.js"></script>
 <script type="text/javascript" src="./js/taskEdit.js"></script>
+<script type="text/javascript" src="./js/toast.js"></script>
 
 <script type="text/javascript" src="simditor/scripts/module.js"></script>
 <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
@@ -109,84 +111,99 @@
   </div>
   <div style="float:left; width:70%; height:100%;text-align:center;">
     <div class="ui card" style="width:80%;height:80%;margin:auto;">
-      <div class="content" style="width:100%;max-height:10%;vertical:middle;">
-        <div id="header_title" style="float:left;margin-right:10px;">
-          <p id="header_view_title" style="display:inline;">2016年第1周计划安排</p>
-          <div class="ui input" id="header_input_title_container" style="display:none;width:100%;">
-            <input placeholder="输入大标题..." type="text" id="header_input_title">
+      <div class="content" style="width:100%;max-height:20%;vertical:middle;margin:auto;">
+        <button class="ui button" id="header_title_btn" style="min-width:40%;">2016年第1周计划安排</button>
+        <div class="ui icon basic buttons right floated" style="min-width:200px;">
+          <div class="ui animated button" tabindex="0">
+            <div class="visible content"><i class="minus circle icon"></i></div>
+            <div class="hidden content">
+              删除所有
+            </div>
+          </div>
+          <div class="ui animated button" tabindex="0" id="new_task_btn">
+            <div class="visible content"><i class="add circle icon"></i></div>
+            <div class="hidden content">
+              新建任务
+            </div>
           </div>
         </div>
-        <div style="float:right;">
-          <button class="ui left attached button" id="edit_or_save_title_btn">编辑大标题</button>
-          <button class="right attached ui button" id="new_or_save_task_btn">新建任务</button>
+        <div class="ui flowing popup bottom left transition hidden" id="popup_header_title_edit">
+          <div class="ui action input">
+            <input placeholder="输入新标题" type='text' id="title_input">
+            <button class="ui red button" id="save_title_btn">修改</button>
+          </div>
         </div>
       </div>
       <div class="content" style="width:100%;height:100%;" id="tab_group">
-        <div class="ui bottom attached tab segment active" id="task_view_tab">
-          <table class="ui celled table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Edit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="title active"><i class="dropdown icon"></i>复习本周的功课</div>
-                  <div class="content">
-                    <p style="display: block ! important;" class="transition visible">该任务包含什么。。。。。。</p>
-                  </div>
-                </td>
-                <td>完成</td>
-                <td>Edit</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="title active"><i class="dropdown icon"></i>做完本周所有布置的作业</div>
-                  <div class="content">
-                    <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
-                  </div>
-                </td>
-                <td>待完成</td>
-                <td>Edit</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="title active"><i class="dropdown icon"></i>学习新的功课</div>
-                  <div class="content">
-                    <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
-                  </div>
-                </td>
-                <td>待完成</td>
-                <td>Edit</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr><th>3个 任务</th>
-              <th>1个 已完成</th>
-              <th></th>
-            </tr></tfoot>
-          </table>
-        </div>
-        <div class="ui bottom attached tab segment" id="task_edit_tab">
-          <div id="editor">
-            <div class="ui right labeled left icon input" style="width:100%;margin-bottom:10px;">
-              <input placeholder="输入小标题" type="text" id="little_title">
-              <label class="ui tag label" for="little_title">小标题</label>
-            </div>
-            <textarea id="task_editor" placeholder="Balabala" autofocus></textarea>
-          </div>
-        </div>
-        <div class="ui bottom attached tab segment" id="task_none_tab">none task </div>
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>复习本周的功课</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition visible">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
+              <td>完成</td>
+              <td>Edit</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>做完本周所有布置的作业</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
+              <td>待完成</td>
+              <td>Edit</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="title active"><i class="dropdown icon"></i>学习新的功课</div>
+                <div class="content">
+                  <p style="display: block ! important;" class="transition hidden">该任务包含什么。。。。。。</p>
+                </div>
+              </td>
+              <td>待完成</td>
+              <td>Edit</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr><th>3个 任务</th>
+            <th>1个 已完成</th>
+            <th></th>
+          </tr></tfoot>
+        </table>
+    </div>
+  </div>
+</div>
+<div class="ui modal" id="task_modal">
+  <div class="header" id="task_header_name">
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="field" style="margin-top:10px;">
+        <h4 class="ui header">任务标题</h4>
+        <input class="dividing" type="text" id="task_title"/>
       </div>
-      <div class="extra content" style="max-height:10%;">
-        <button class="ui button google plus " id="delete_all_btn">删除所有</button>
-        <button class="ui primary button" id="save_all_btn" style="display:none;">保存所有修改</button>
+      <div class="field" style="margin-top:10px;">
+        <h4 class="ui header">任务内容</h4>
+        <textarea id="task_editor" autofocus id="task_content"></textarea>
       </div>
     </div>
   </div>
+  <div class="actions">
+    <div class="ui negative button">取消</div>
+    <div class="ui positive right labeled icon button">保存 <i class="checkmark icon"></i> </div>
+  </div>
+  <input style="display:none;" id="task_id_input" value="" />
 </div>
 </body>
 </html>
