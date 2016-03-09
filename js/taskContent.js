@@ -1,10 +1,15 @@
 $(document).ready(function(){
-  // $("#task_modal").modal({
-  //   onVisible:function(){
-  //
-  //   }
-  // });
+  initialTestData();
 });
+
+function initialTestData() {
+  var length = 10;
+  var taskListNode = $("#task_table");
+  taskListNode.empty();
+  for(var i=1; i<=length; i++) {
+    taskListNode.append(createTaskListItem("这是任务" + i, "创建日期是1901-01-01", i%2==0?"完成":"未完成"));
+  }
+}
 
 function showTaskPopup(header, title, content, taskId) {
   if(header != null) {
@@ -29,7 +34,14 @@ function showTaskPopup(header, title, content, taskId) {
     $("#task_id_input").val(-1);
   }
 
-  $("#task_modal").modal('setting', 'closable', false).modal('show').modal();
+  $("#task_modal").modal('setting', 'closable', false).modal('show');
 
   initializeEditorIfNeeded();
+}
+
+function createTaskListItem(taskTitle, taskContent, status) {
+  return $('<tr><td><div class="title active"><i class="dropdown icon"></i>'
+          + taskTitle + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
+          + taskContent + '</p></div></td><td>'
+          + status + '</td><td>Edit</td></tr>');
 }
