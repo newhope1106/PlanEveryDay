@@ -21,3 +21,7 @@ function createPlanListItem(planTitle, planDescription, planId){
           + planTitle + '</div><div class="description">'
           + planDescription + '</div></div></div>');
 }
+
+function showPlanPopup() {
+  $("#plan_modal").modal('setting', 'closable', false).modal('show');
+}

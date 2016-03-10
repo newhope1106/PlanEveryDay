@@ -10,7 +10,7 @@ function attachContextEvent(childSelector, type, parentSelector) {
   		{
         text: '新建计划',
         action: function(e){
-  				alert("create a plan");
+  				showPlanPopup();
   			}
       }
   	]);
@@ -30,8 +30,12 @@ function attachContextEvent(childSelector, type, parentSelector) {
        text: '删除计划',
         action: function(e, currentContextSelector){
           if(currentContextSelector != undefined) {
-            deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(){
+            deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(callback){
               alert("planId = " + currentContextSelector.attr("attr-id"));
+              currentContextSelector.remove();
+              if (callback!=null) {
+                callback()
+              }
             });
           }
         }

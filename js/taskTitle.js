@@ -46,9 +46,13 @@ function deleteAlertDialog(title, content, type, callback) {
   function(isConfirm){
     if (isConfirm) {
       if (callback != null) {
-        callback();
+        callback(function(){
+          swal("删除成功!", "该计划的所有任务都被删除.", "success");
+        });
+      } else {
+        swal("删除成功!", "该计划的所有任务都被删除.", "success");
       }
-      swal("删除成功!", "该计划的所有任务都被删除.", "success");
+
     } else {
       swal("取消删除", "取消删除操作 :)", "error");
     }
