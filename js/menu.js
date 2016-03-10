@@ -5,7 +5,6 @@ var template = [
   {
     label: '新建',
     click: function(item, focusedWindow) {
-
     }
   },
   {

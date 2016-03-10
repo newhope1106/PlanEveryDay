@@ -23,11 +23,10 @@ function showTaskPopup(header, taskId, title, content) {
   }
 
   if (content != null) {
-    $("#task_editor").val(content);
+    $("#task_content").val(content);
   } else {
-    $("#task_editor").val("");
+    $("#task_content").val("");
   }
-
 
   if (typeof(taskId) == "number" || typeof(taskId) == "string") {
     $("#task_id_input").val(taskId);

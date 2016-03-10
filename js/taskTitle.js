@@ -19,17 +19,13 @@ $(document).ready(function(){
   });
 
   $("#new_task_btn").click(function(){
-    createNewTask($("#header_title_btn").text());
+    showTaskPopup($("#header_title_btn").text());
   });
 
   $("#delete_all_btn").click(function(){
     deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", null);
   });
 });
-
-function createNewTask(headerTitle) {
-  showTaskPopup(headerTitle);
-}
 
 function deleteAlertDialog(title, content, type, callback) {
   swal({

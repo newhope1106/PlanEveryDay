@@ -22,7 +22,7 @@ function attachContextEvent(childSelector, type, parentSelector) {
         action: function(e, currentContextSelector){
           if (currentContextSelector != undefined) {
             var planTitle = currentContextSelector.find(".header:first-child").text();
-            createNewTask(planTitle, currentContextSelector.attr("attr-id"));
+            showTaskPopup(planTitle, currentContextSelector.attr("attr-id"));
           }
   			}
       },
