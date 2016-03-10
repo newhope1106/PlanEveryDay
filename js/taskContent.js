@@ -11,7 +11,7 @@ function initialTestData() {
   }
 }
 
-function showTaskPopup(header, title, content, taskId) {
+function showTaskPopup(header, taskId, title, content) {
   if(header != null) {
     $("#task_header_name").text(header);
   }
@@ -28,9 +28,10 @@ function showTaskPopup(header, title, content, taskId) {
     $("#task_editor").val("");
   }
 
-  if (typeof(taskId) == "number") {
+
+  if (typeof(taskId) == "number" || typeof(taskId) == "string") {
     $("#task_id_input").val(taskId);
-  } else {
+  } else{
     $("#task_id_input").val(-1);
   }
 

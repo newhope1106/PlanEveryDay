@@ -20,16 +20,20 @@ function attachContextEvent(childSelector, type, parentSelector) {
   		{
         text: '新建任务',
         action: function(e, currentContextSelector){
-  				alert(currentContextSelector.attr("attr-id"));
+          if (currentContextSelector != undefined) {
+            var planTitle = currentContextSelector.find(".header:first-child").text();
+            createNewTask(planTitle, currentContextSelector.attr("attr-id"));
+          }
   			}
       },
   	  {
        text: '删除计划',
         action: function(e, currentContextSelector){
           if(currentContextSelector != undefined) {
-            alert(currentContextSelector.attr("attr-id"));
+            deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(){
+              alert("planId = " + currentContextSelector.attr("attr-id"));
+            });
           }
-          alert("delete a pan");
         }
       }
   	], childSelector);
