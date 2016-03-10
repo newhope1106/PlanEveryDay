@@ -19,14 +19,16 @@ function attachContextEvent(childSelector, type, parentSelector) {
   	context.attach(parentSelector, [
   		{
         text: '新建任务',
-        action: function(e){
-  				alert("create a task");
-          console.log(e);
+        action: function(e, currentContextSelector){
+  				alert(currentContextSelector.attr("attr-id"));
   			}
       },
   	  {
        text: '删除计划',
-        action: function(e){
+        action: function(e, currentContextSelector){
+          if(currentContextSelector != undefined) {
+            alert(currentContextSelector.attr("attr-id"));
+          }
           alert("delete a pan");
         }
       }
