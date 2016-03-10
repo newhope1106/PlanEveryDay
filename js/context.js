@@ -14,7 +14,7 @@ context = (function () {
 			// Modify $obj, Do not return
 		},
 		above: 'auto',
-        left: 'auto',
+  	left: 'auto',
 		preventDoubleContext: true,
 		compress: false
 	};
@@ -54,7 +54,7 @@ context = (function () {
 			compressed = options.compress ? ' compressed-context' : '',
 			$menu = $('<ul class="dropdown-menu dropdown-context' + subClass + compressed +'" id="dropdown-' + id + '"></ul>');
 
-        return buildMenuItems($menu, data, id, subMenu);
+      return buildMenuItems($menu, data, id, subMenu);
 	}
 
     function buildMenuItems($menu, data, id, subMenu, addDynamicTag) {
@@ -128,7 +128,7 @@ context = (function () {
         return $menu;
     }
 
-	function addContext(selector, data) {
+	function addContext(selector, data, parentSelector) {
         if (typeof data.id !== 'undefined' && typeof data.data !== 'undefined') {
             var id = data.id;
             $menu = $('body').find('#dropdown-' + id)[0];
@@ -142,16 +142,16 @@ context = (function () {
                 $menu = buildMenu(data, id);
                 $('body').append($menu);
         }
+				if (parentSelector != null) {
+					$(parentSelector).on('contextmenu', selector, function (e) {
+						e.preventDefault();
+						e.stopPropagation();
 
-		$(selector).on('contextmenu', function (e) {
-			e.preventDefault();
-			e.stopPropagation();
+			      currentContextSelector = $(this);
 
-            currentContextSelector = $(this);
+						$('.dropdown-context:not(.dropdown-context-sub)').hide();
 
-			$('.dropdown-context:not(.dropdown-context-sub)').hide();
-
-			$dd = $('#dropdown-' + id);
+						$dd = $('#dropdown-' + id);
 
             $dd.find('.dynamic-menu-item').remove(); // Destroy any old dynamic menu items
             $dd.find('.dynamic-menu-src').each(function(idx, element) {
@@ -194,7 +194,63 @@ context = (function () {
                     });
                 }
             }
-		});
+					});
+				} else {
+					$(selector).on('contextmenu', function (e) {
+						e.preventDefault();
+						e.stopPropagation();
+
+			      currentContextSelector = $(this);
+
+						$('.dropdown-context:not(.dropdown-context-sub)').hide();
+
+						$dd = $('#dropdown-' + id);
+
+            $dd.find('.dynamic-menu-item').remove(); // Destroy any old dynamic menu items
+            $dd.find('.dynamic-menu-src').each(function(idx, element) {
+                var menuItems = window[$(element).data('src')]($(selector));
+                $parentMenu = $(element).closest('.dropdown-menu.dropdown-context');
+                $parentMenu = buildMenuItems($parentMenu, menuItems, id, undefined, true);
+            });
+
+						if (typeof options.above == 'boolean' && options.above) {
+							$dd.addClass('dropdown-context-up').css({
+								top: e.pageY - $('#dropdown-' + id).height(),
+								left: e.pageX
+							}).fadeIn(options.fadeSpeed);
+						} else if (typeof options.above == 'string' && options.above == 'auto') {
+							$dd.removeClass('dropdown-context-up');
+							var autoH = $dd.height() + 12;
+							if ((e.pageY + autoH) > $('html').height()) {
+								$dd.addClass('dropdown-context-up').css({
+									top: e.pageY - 20 - autoH,
+									left: e.pageX - 13
+								}).fadeIn(options.fadeSpeed);
+							} else {
+								$dd.css({
+									top: e.pageY + 10,
+									left: e.pageX - 13
+								}).fadeIn(options.fadeSpeed);
+							}
+						}
+
+            if (typeof options.left == 'boolean' && options.left) {
+                $dd.addClass('dropdown-context-left').css({
+                    left: e.pageX - $dd.width()
+                }).fadeIn(options.fadeSpeed);
+            } else if (typeof options.left == 'string' && options.left == 'auto') {
+                $dd.removeClass('dropdown-context-left');
+                var autoL = $dd.width() - 12;
+                if ((e.pageX + autoL) > $('html').width()) {
+                    $dd.addClass('dropdown-context-left').css({
+                        left: e.pageX - $dd.width() + 13
+                    });
+                }
+            }
+					});
+				}
+
+
 	}
 
 	function destroyContext(selector) {

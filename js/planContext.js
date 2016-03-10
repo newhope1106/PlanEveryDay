@@ -1,12 +1,12 @@
 $(document).ready(function(){
   attachContextEvent("#plan_list", "plan");
-  attachContextEvent("#list_items_container>div", "task");
+  attachContextEvent("#list_items_container", "task", ".item");
 });
 
-function attachContextEvent(nodeId, type) {
+function attachContextEvent(childSelector, type, parentSelector) {
   if (type == "plan") {
     context.init({preventDoubleContext: false});
-  	context.attach(nodeId, [
+  	context.attach(childSelector, [
   		{
         text: '新建计划',
         action: function(e){
@@ -16,7 +16,7 @@ function attachContextEvent(nodeId, type) {
   	]);
   } else if (type == "task") {
     context.init({preventDoubleContext: false});
-  	context.attach(nodeId, [
+  	context.attach(parentSelector, [
   		{
         text: '新建任务',
         action: function(e){
@@ -30,7 +30,7 @@ function attachContextEvent(nodeId, type) {
           alert("delete a pan");
         }
       }
-  	]);
+  	], childSelector);
   }
 
 }
