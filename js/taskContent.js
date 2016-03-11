@@ -1,13 +1,11 @@
-$(document).ready(function(){
-  initialTestData();
-});
-
-function initialTestData() {
-  var length = 10;
+function initialTestData(planId) {
+  var results = DBManager.queryTask(planId);
+  var length = results.length;
   var taskListNode = $("#task_table");
   taskListNode.empty();
   for(var i=1; i<=length; i++) {
-    taskListNode.append(createTaskListItem("这是任务" + i, "创建日期是1901-01-01", i%2==0?"完成":"未完成"));
+    var task = results[i];
+    taskListNode.append(createTaskListItem(task.getTitle(), task.getContent(), task.isFinished()?"完成":"未完成"));
   }
 }
 

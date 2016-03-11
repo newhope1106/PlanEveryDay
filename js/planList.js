@@ -1,15 +1,13 @@
-$(document).ready(function(){
-  initialPlanListTestData();
-});
-
-function initialPlanListTestData(){
-  var length = 10;
+function initialPlanListTestData(date, keyword){
+  var results = DBManager.searchPlan(date, keyword);
+  var length = results.length;
   var planListView = $("#list_items_container");
   planListView.empty();
 
    for(var i=1; i<=length; i++) {
-     var planListItem = createPlanListItem("2016年第" + i + "周工作安排",
-      "创建日期：2016-01-" + (i<10?"0"+i:i), i);
+     var plan = results[i];
+     var planListItem = createPlanListItem(plan.getTitle(),
+      "创建日期：" + plan.getCreateDate(), plan.getId());
      planListView.append(planListItem);
    }
 }

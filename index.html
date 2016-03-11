@@ -27,6 +27,11 @@
 <script type="text/javascript" src="./js/planList.js"></script>
 <script type="text/javascript" src="./js/form.js"></script>
 
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/db/dbManager.js"></script>
+<script type="text/javascript" src="./js/model/plan.js"></script>
+<script type="text/javascript" src="./js/model/task.js"></script>
+
 <script type="text/javascript" src="simditor/scripts/module.js"></script>
 <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="simditor/scripts/uploader.js"></script>
@@ -54,8 +59,8 @@
   <div style="width:100%; min-width:1000px; height:100%;padding:50px;">
   <div style="float:left; width:30%; height:100%;text-align:center;">
     <div class="ui action input" style="width:100%;">
-      <input placeholder="搜索..." type="text" style="width:80%;">
-      <button class="ui icon button" style="width:20%;text-align:center;">
+      <input placeholder="搜索..." type="text" style="width:80%;" id="search_keyword">
+      <button class="ui icon button" style="width:20%;text-align:center;" id="search_plan_btn">
         <i class="search icon" style="margin:auto;"></i>
       </button>
     </div>
@@ -64,7 +69,7 @@
         <i class="icon_calendar icon"></i>选择日期
       </button>
       <label class="ui label" style="font-size:16px;display:none;" id="date_label_container">
-        <label id="date_label">2016-01-01</label>
+        <label id="date_label"></label>
         <i class="delete icon" id="label_delete"></i>
       </label>
     </div>
