@@ -3,7 +3,7 @@ function initialTestData(planId) {
   var length = results.length;
   var taskListNode = $("#task_table");
   taskListNode.empty();
-  for(var i=1; i<=length; i++) {
+  for(var i=0; i<length; i++) {
     var task = results[i];
     taskListNode.append(createTaskListItem(task.getTitle(), task.getContent(), task.isFinished()?"完成":"未完成"));
   }

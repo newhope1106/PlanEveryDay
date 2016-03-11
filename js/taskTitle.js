@@ -18,6 +18,15 @@ $(document).ready(function(){
     $("#title_input").val($("#header_title_btn").text());
   });
 
+  //每个计划列表的元素添加点击事件
+  $("#list_items_container").on("click", ".item",  function(){
+    var planItem = $(this);
+    initialTestData(planItem.attr("attr-id"));
+    $("#about_container").css("display", "none");
+    $("#task_container").css("display", "block");
+  });
+
+  //新建任务
   $("#new_task_btn").click(function(){
     showTaskPopup($("#header_title_btn").text());
   });

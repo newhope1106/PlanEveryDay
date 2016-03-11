@@ -4,7 +4,7 @@ function initialPlanListTestData(date, keyword){
   var planListView = $("#list_items_container");
   planListView.empty();
 
-   for(var i=1; i<=length; i++) {
+   for(var i=0; i<length; i++) {
      var plan = results[i];
      var planListItem = createPlanListItem(plan.getTitle(),
       "创建日期：" + plan.getCreateDate(), plan.getId());

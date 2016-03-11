@@ -48,7 +48,6 @@ Plan.prototype.getTitle = function(){
   if (this.newTitle != "") {
     return this.newTitle;
   }
-
   return this.title;
 }
 
