@@ -1,15 +1,41 @@
+var planListResults = null;
 function initialPlanListTestData(date, keyword){
   var results = DBManager.searchPlan(date, keyword);
-  var length = results.length;
-  var planListView = $("#list_items_container");
-  planListView.empty();
+  planListResults = results;
 
-   for(var i=0; i<length; i++) {
-     var plan = results[i];
-     planListView.append($(plan.toHTML()));
-   }
+  planListNotifyDataSetChanged();
 }
 
 function showPlanPopup() {
   $("#plan_modal").modal('setting', 'closable', false).modal('show');
+}
+
+function removePlanListItem(planId) {
+  if (planListResults != null) {
+    var length = planListResults.length;
+    for(var i=0; i<length; i++) {
+      var plan = planListResults[i];
+      if (plan.getId() == planId) {
+        planListResults.splice(i, 1);
+        break;
+      }
+    }
+
+    if (length != planListResults.length) {
+      planListNotifyDataSetChanged();
+    }
+  }
+}
+
+function planListNotifyDataSetChanged(){
+  if (planListResults != null) {
+    var length = planListResults.length;
+    var planListView = $("#list_items_container");
+    planListView.empty();
+
+     for(var i=0; i<length; i++) {
+       var plan = planListResults[i];
+       planListView.append($(plan.toHTML()));
+     }
+  }
 }

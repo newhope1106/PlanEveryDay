@@ -1,5 +1,8 @@
 function initialTestData(planId) {
   var results = DBManager.queryTask(planId);
+  var plan = DBManager.getPlan(planId);
+  $("#header_title_btn").text(plan.getTitle());
+  $("#header_title_btn").attr("attr-plan-id", planId);
   var length = results.length;
   var taskListNode = $("#task_table");
   taskListNode.empty();

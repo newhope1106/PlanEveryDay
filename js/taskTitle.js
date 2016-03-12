@@ -22,8 +22,7 @@ $(document).ready(function(){
   $("#list_items_container").on("click", ".item",  function(){
     var planItem = $(this);
     initialTestData(planItem.attr("attr-id"));
-    $("#about_container").css("display", "none");
-    $("#task_container").css("display", "block");
+    translateToTaskContent();
   });
 
   //新建任务
@@ -32,9 +31,32 @@ $(document).ready(function(){
   });
 
   $("#delete_all_btn").click(function(){
-    deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", null);
+    deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(callback){
+      deletePlan($("#header_title_btn").attr("attr-plan-id"));
+
+      if (callback != null) {
+        callback();
+      }
+    });
   });
 });
+
+function translateToAboutContent(){
+  $("#task_container").css("display", "none");
+  $("#about_container").css("display", "block");
+}
+
+function translateToTaskContent(){
+  $("#about_container").css("display", "none");
+  $("#task_container").css("display", "block");
+}
+
+function deletePlan(planId){
+  if ($("#header_title_btn").attr("attr-plan-id") == planId) {
+    translateToAboutContent();
+  }
+  removePlanListItem(planId);
+}
 
 function deleteAlertDialog(title, content, type, callback) {
   swal({

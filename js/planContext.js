@@ -31,7 +31,7 @@ function attachContextEvent(childSelector, type, parentSelector) {
         action: function(e, currentContextSelector){
           if(currentContextSelector != undefined) {
             deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(callback){
-              alert("planId = " + currentContextSelector.attr("attr-id"));
+              deletePlan(currentContextSelector.attr("attr-id"));
               currentContextSelector.remove();
               if (callback!=null) {
                 callback()
