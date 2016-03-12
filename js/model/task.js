@@ -107,3 +107,16 @@ Task.prototype.isFinished = function() {
 
   return false;
 }
+
+Task.prototype.getId = function() {
+  return this.taskId;
+}
+
+Task.prototype.toHTML = function() {
+  return '<tr><td><div class="title active"><i class="dropdown icon"></i>'
+          + this.title + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
+          + this.content + '</p></div></td><td>'
+          + (this.isFinished()?"完成":"未完成") + '</td><td>'
+          + '<a attr-id=' + this.taskId + ' href="#">edit</a>&nbsp;&nbsp;'
+          +'<a attr_id=' + this.taskId + ' href="#">delete</a></td></tr>';
+}

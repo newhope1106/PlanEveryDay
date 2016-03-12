@@ -5,7 +5,7 @@ function initialTestData(planId) {
   taskListNode.empty();
   for(var i=0; i<length; i++) {
     var task = results[i];
-    taskListNode.append(createTaskListItem(task.getTitle(), task.getContent(), task.isFinished()?"完成":"未完成"));
+    taskListNode.append($(task.toHTML()));
   }
 }
 
@@ -35,11 +35,4 @@ function showTaskPopup(header, taskId, title, content) {
   $("#task_modal").modal('setting', 'closable', false).modal('show');
 
   initializeEditorIfNeeded();
-}
-
-function createTaskListItem(taskTitle, taskContent, status) {
-  return $('<tr><td><div class="title active"><i class="dropdown icon"></i>'
-          + taskTitle + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
-          + taskContent + '</p></div></td><td>'
-          + status + '</td><td>Edit</td></tr>');
 }

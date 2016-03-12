@@ -62,3 +62,11 @@ Plan.prototype.getLastUpdateDate = function() {
 Plan.prototype.getId = function(){
   return this.planId;
 }
+
+Plan.prototype.toHTML = function(){
+  return '<div class="item" attr-id='
+          + this.planId +'><i class="file icon"></i>'
+          +'<div class="content"><div class="header">'
+          + this.title + '</div><div class="description">'
+          + "创建日期：" + this.createDate + '</div></div></div>'
+}
