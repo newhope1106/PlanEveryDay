@@ -21,7 +21,7 @@ $(document).ready(function(){
   //每个计划列表的元素添加点击事件
   $("#list_items_container").on("click", ".item",  function(){
     var planItem = $(this);
-    initialTestData(planItem.attr("attr-id"));
+    queryTaskData(planItem.attr("attr-id"));
     translateToTaskContent();
   });
 

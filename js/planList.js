@@ -1,5 +1,5 @@
 var planListResults = null;
-function initialPlanListTestData(date, keyword){
+function queryPlanData(date, keyword){
   var results = DBManager.searchPlan(date, keyword);
   planListResults = results;
 

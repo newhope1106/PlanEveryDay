@@ -1,14 +1,23 @@
-function initialTestData(planId) {
-  var results = DBManager.queryTask(planId);
+var taskListResults = null;
+function queryTaskData(planId) {
+  taskListResults = DBManager.queryTask(planId);
+
   var plan = DBManager.getPlan(planId);
   $("#header_title_btn").text(plan.getTitle());
   $("#header_title_btn").attr("attr-plan-id", planId);
-  var length = results.length;
-  var taskListNode = $("#task_table");
-  taskListNode.empty();
-  for(var i=0; i<length; i++) {
-    var task = results[i];
-    taskListNode.append($(task.toHTML()));
+
+  taskListNotifydatasetChanged();
+}
+
+function taskListNotifydatasetChanged() {
+  if (taskListResults != null) {
+    var length = taskListResults.length;
+    var taskListNode = $("#task_table");
+    taskListNode.empty();
+    for(var i=0; i<length; i++) {
+      var task = taskListResults[i];
+      taskListNode.append($(task.toHTML()));
+    }
   }
 }
 
