@@ -4,4 +4,12 @@ $(document).ready(function(){
     var keyword = $("#search_keyword").val();
     queryPlanData(date, keyword);
   });
+
+  $("#task_table").on("click", ".task_edit_link", function(){
+    alert($(this).html());
+  })
+
+  $("#task_table").on("click", ".task_delete_link", function(){
+    alert($(this).html());
+  })
 });

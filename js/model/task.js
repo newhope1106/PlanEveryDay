@@ -117,6 +117,6 @@ Task.prototype.toHTML = function() {
           + this.title + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
           + this.content + '</p></div></td><td>'
           + (this.isFinished()?"完成":"未完成") + '</td><td>'
-          + '<a attr-id=' + this.taskId + ' href="#">edit</a>&nbsp;&nbsp;'
-          +'<a attr_id=' + this.taskId + ' href="#">delete</a></td></tr>';
+          + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
+          +'<a attr_id=' + this.taskId + ' class="task_delete_link" href="#">delete</a></td></tr>';
 }
