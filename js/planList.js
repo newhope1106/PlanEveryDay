@@ -30,6 +30,11 @@ function removePlanListItem(planId) {
 function planListNotifyDataSetChanged(){
   if (planListResults != null) {
     var length = planListResults.length;
+    if(length > 0) {
+      $("#plan_list").css("visibility", "visible");
+    }else {
+      $("#plan_list").css("visibility", "hidden");
+    }
     var planListView = $("#list_items_container");
     planListView.empty();
 
