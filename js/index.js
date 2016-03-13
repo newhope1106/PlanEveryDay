@@ -6,10 +6,23 @@ $(document).ready(function(){
   });
 
   $("#task_table").on("click", ".task_edit_link", function(){
-    alert($(this).html());
+    var taskId = $(this).attr("attr-id");
+    var task = DBManager.getTask(taskId);
+    showTaskPopup($("#header_title_btn").text(), taskId, task.getTitle(), task.getContent());
   })
 
   $("#task_table").on("click", ".task_delete_link", function(){
-    alert($(this).html());
+    var taskId = $(this).attr("attr-id");
+    var task = DBManager.getTask(taskId);
+
+
+    deleteAlertDialog("确定要删除?", "将会删除该任务!", "warning", function(callback){
+        removeTaskListItem(taskId);
+        task.delete();
+
+        if (callback != null) {
+         callback();
+       }
+     });
   })
 });

@@ -21,6 +21,24 @@ function taskListNotifydatasetChanged() {
   }
 }
 
+function removeTaskListItem(taskId){
+  if (taskListResults != null) {
+    var length = taskListResults.length;
+
+    for(var i=0; i<length; i++) {
+      var task = taskListResults[i];
+      if (task.getId() == taskId) {
+        taskListResults.splice(i, 1);
+        break;
+      }
+    }
+
+    if (length != taskListResults.length) {
+      taskListNotifydatasetChanged();
+    }
+  }
+}
+
 function showTaskPopup(header, taskId, title, content) {
   if(header != null) {
     $("#task_header_name").text(header);
