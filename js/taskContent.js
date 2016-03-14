@@ -4,6 +4,7 @@ function queryTaskData(planId) {
 
   var plan = DBManager.getPlan(planId);
   $("#header_title_btn").text(plan.getTitle());
+  $("#title_input").val($("#header_title_btn").text());
   $("#header_title_btn").attr("attr-plan-id", planId);
 
   taskListNotifydatasetChanged();
