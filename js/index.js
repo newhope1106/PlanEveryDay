@@ -47,11 +47,11 @@ function initTaskHeaderEvent(){
   });
 
   $("#delete_all_btn").click(function(){
-    deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(callback){
+    deleteAlertDialog("确定要删除?", "将会删除计划的所有任务!", "warning", function(callback){
       deletePlan($("#header_title_btn").attr("attr-plan-id"));
 
       if (callback != null) {
-        callback();
+        callback("该计划的所有任务都被删除");
       }
     });
   });
@@ -73,7 +73,7 @@ function initTaskContentEvents(){
         deleteTask(taskId);
 
         if (callback != null) {
-         callback();
+         callback("该任务被删除");
        }
      });
   });
@@ -237,11 +237,9 @@ function deleteAlertDialog(title, content, type, callback) {
   function(isConfirm){
     if (isConfirm) {
       if (callback != null) {
-        callback(function(){
-          swal("删除成功!", "该计划的所有任务都被删除.", "success");
+        callback(function(msg){
+          swal("删除成功!", msg, "success");
         });
-      } else {
-        swal("删除成功!", "该计划的所有任务都被删除.", "success");
       }
 
     } else {
@@ -277,11 +275,11 @@ function attachContextEvent(childSelector, type, parentSelector) {
        text: '删除计划',
         action: function(e, currentContextSelector){
           if(currentContextSelector != undefined) {
-            deleteAlertDialog("确定要删除?", "将会删除所有的任务!", "warning", function(callback){
+            deleteAlertDialog("确定要删除?", "将会删除计划的所有任务!", "warning", function(callback){
               deletePlan(currentContextSelector.attr("attr-id"));
               currentContextSelector.remove();
               if (callback!=null) {
-                callback()
+                callback("该计划的所有任务都被删除")
               }
             });
           }
