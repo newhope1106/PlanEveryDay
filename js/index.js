@@ -57,6 +57,7 @@ function initTaskHeaderEvent(){
   });
 }
 
+//初始化任务的编辑和删除事件
 function initTaskContentEvents(){
   $("#task_table").on("click", ".task_edit_link", function(){
     var taskId = $(this).attr("attr-id");
@@ -78,6 +79,7 @@ function initTaskContentEvents(){
   });
 }
 
+//初始化列表的菜单和点击事件
 function initPlanListEvents(){
   //每个计划列表的元素添加点击事件
   $("#list_items_container").on("click", ".item",  function(){
@@ -108,6 +110,7 @@ function initClickEvents(){
   });
 }
 
+//删除计划
 function deletePlan(planId){
   if ($("#header_title_btn").attr("attr-plan-id") == planId) {
     translateToAboutContent();
@@ -118,6 +121,7 @@ function deletePlan(planId){
   }
 }
 
+//删除任务
 function deleteTask(taskId){
   if (taskListView != null){
     var task = taskListView.getItemById(taskId);
