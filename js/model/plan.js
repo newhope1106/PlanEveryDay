@@ -40,7 +40,7 @@ Plan.prototype.delete = function() {
   }
 }
 
-Plan.prototype.updateTtitle = function(title) {
+Plan.prototype.updateTitle = function(title) {
   this.newTitle = title;
 }
 
@@ -67,6 +67,6 @@ Plan.prototype.toHTML = function(){
   return '<div class="item" attr-id='
           + this.planId +'><i class="file icon"></i>'
           +'<div class="content"><div class="header">'
-          + this.title + '</div><div class="description">'
+          + this.getTitle() + '</div><div class="description">'
           + "创建日期：" + this.createDate + '</div></div></div>'
 }

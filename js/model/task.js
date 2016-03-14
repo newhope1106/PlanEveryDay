@@ -56,7 +56,7 @@ Task.prototype.delete = function() {
   }
 }
 
-Task.prototype.updateTtitle = function(title) {
+Task.prototype.updateTitle = function(title) {
   this.newTitle = title;
 }
 
@@ -114,8 +114,8 @@ Task.prototype.getId = function() {
 
 Task.prototype.toHTML = function() {
   return '<tr><td><div class="title active"><i class="dropdown icon"></i>'
-          + this.title + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
-          + this.content + '</p></div></td><td>'
+          + this.getTitle() + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
+          + this.getContent() + '</p></div></td><td>'
           + (this.isFinished()?"完成":"未完成") + '</td><td>'
           + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
           +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a></td></tr>';
