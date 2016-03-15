@@ -1,17 +1,17 @@
 function Task(title, content, status, taskId, createDate, lastUpdateDate, planId){
-  this.taskId = -1;
+  this.taskId = "";
   this.title = "";
   this.content = "";
   this.createDate = "";
   this.lastUpdateDate = "";
   this.status = 0;
-  this.planId = -1;
+  this.planId = "";
 
   this.newTitle = "";
   this.newContent = "";
   this.newStatus = 0;
 
-  if (typeof(taskId) == "number") {
+  if (taskId != null) {
     this.taskId = taskId;
   }
 
@@ -35,7 +35,7 @@ function Task(title, content, status, taskId, createDate, lastUpdateDate, planId
     this.lastUpdateDate = lastUpdateDate;
   }
 
-  if (typeof(planId) == "number") {
+  if (planId != null) {
     this.planId = planId;
   }
 }
@@ -56,7 +56,7 @@ Task.prototype.save = function(){
 }
 
 Task.prototype.delete = function() {
-  if (this.taskId != -1) {
+  if (this.taskId != null) {
 
   }
 }
@@ -78,7 +78,7 @@ Task.prototype.updateStatus = function(status) {
 }
 
 Task.prototype.setPlanId = function(planId){
-  if (typeof(planId) == "number") {
+  if (planId != null) {
     this.planId = planId;
   }
 }
@@ -129,7 +129,7 @@ Task.prototype.toJSON = function() {
   var year = date.getFullYear(), month=date.getMonth(), day=date.getDate();
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
 
-  if (this.taskId < 0) {
+  if (this.taskId == null || this.taskId == "") {
     return {
       title:this.title,
       content:this.content,
@@ -140,12 +140,19 @@ Task.prototype.toJSON = function() {
   } else {
     if (this.title != this.newTitle || this.content != this.newContent
       || this.status != this.newStatus) {
-        return {
-          title:this.newTitle,
-          content:this.newContent,
-          status:this.newStatus,
-          lastUpdateDate:dateStr
+        var updateJSON = {};
+        if (this.title != this.newTitle) {
+          updateJSON.title = this.newTitle;
         }
+
+        if (this.content != this.newContent) {
+          updateJSON.content = this.newContent;
+        }
+
+        if (this.status != this.newStatus) {
+          updateJSON.status = this.newStatus;
+        }
+        return updateJSON;
     }
 
     return null;

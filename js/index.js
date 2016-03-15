@@ -1,6 +1,8 @@
 var planListView=null, taskListView=null;
 
 $(document).ready(function(){
+  DBManager.init();//初始化数据库
+
   initPlanListView();
   initTaskListView();
 
@@ -106,7 +108,8 @@ function initClickEvents(){
   });
 
   $("#plan_save_btn").click(function(){
-    alert("plan title : " + $("#plan_title").val());
+    var plan = new Plan($("#plan_title").val(), null, null, null);
+    DBManager.savePlan(plan);
   });
 }
 
@@ -155,10 +158,12 @@ function showPlanPopup() {
 ** @param keyword 关键字
 */
 function queryPlanData(date, keyword){
-  var results = DBManager.searchPlan(date, keyword);
-  if (planListView != null) {
-    planListView.changeData(results);
-  }
+  DBManager.searchPlan(date, keyword, 0,function(results){
+    if (planListView != null) {
+      planListView.changeData(results);
+    }
+  });
+
 }
 
 /**
@@ -167,7 +172,7 @@ function queryPlanData(date, keyword){
 */
 function queryTaskData(planId){
   var results = DBManager.queryTask(planId);
-  var plan = DBManager.getPlan(planId);
+  var plan = planListView.getItemById(planId);
   $("#header_title_btn").text(plan.getTitle());
   $("#title_input").val($("#header_title_btn").text());
   $("#header_title_btn").attr("attr-plan-id", planId);

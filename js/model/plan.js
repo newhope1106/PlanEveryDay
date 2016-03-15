@@ -1,12 +1,12 @@
 function Plan(title, planId, createDate, lastUpdateDate) {
   this.title = "";
-  this.planId = -1;
+  this.planId = "";
   this.createDate = "";
   this.lastUpdateDate = "";
 
   this.newTitle = "";
 
-  if (typeof(planId) == "number") {
+  if (planId != null) {
     this.planId = planId;
   }
 
@@ -24,7 +24,7 @@ function Plan(title, planId, createDate, lastUpdateDate) {
 }
 
 Plan.prototype.save = function(){
-  if (this.planId == -1) {
+  if (this.planId != "") {
     //insert operation
   } else {
     //update operation;
@@ -35,7 +35,7 @@ Plan.prototype.save = function(){
 }
 
 Plan.prototype.delete = function() {
-  if (this.planId != -1) {
+  if (this.planId != "") {
 
   }
 }
@@ -72,7 +72,7 @@ Plan.prototype.toJSON = function(){
   var date = new Date();
   var year = date.getFullYear(), month=date.getMonth(), day=date.getDate();
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
-  if (this.planId < 0) {
+  if (this.planId == "") {
     return {
       title : this.newTitle,
       createDate : dateStr,
