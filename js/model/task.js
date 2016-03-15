@@ -8,7 +8,7 @@ function Task(title, content, status, taskId, createDate, lastUpdateDate){
 
   this.newTitle = "";
   this.newContent = "";
-  this.newStatus = -1;
+  this.newStatus = 0;
 
   if (typeof(taskId) == "number") {
     this.taskId = taskId;
@@ -122,6 +122,7 @@ Task.prototype.toJSON = function() {
     return {
       title:this.title,
       content:this.content,
+      status:this.newStatus,
       createDate:dateStr,
       lastUpdateDate:dateStr
     }
@@ -131,7 +132,7 @@ Task.prototype.toJSON = function() {
         return {
           title:this.newTitle,
           content:this.newContent,
-          createDate:this.createDate,
+          status:this.newStatus,
           lastUpdateDate:dateStr
         }
     }
