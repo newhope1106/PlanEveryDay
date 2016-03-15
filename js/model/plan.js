@@ -1,6 +1,6 @@
 function Plan(title, planId, createDate, lastUpdateDate) {
   this.title = "";
-  this.planId = planId;
+  this.planId = -1;
   this.createDate = "";
   this.lastUpdateDate = "";
 

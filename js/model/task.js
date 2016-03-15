@@ -1,10 +1,11 @@
-function Task(title, content, status, taskId, createDate, lastUpdateDate){
+function Task(title, content, status, taskId, createDate, lastUpdateDate, planId){
   this.taskId = -1;
   this.title = "";
   this.content = "";
   this.createDate = "";
   this.lastUpdateDate = "";
   this.status = 0;
+  this.planId = -1;
 
   this.newTitle = "";
   this.newContent = "";
@@ -32,6 +33,10 @@ function Task(title, content, status, taskId, createDate, lastUpdateDate){
 
   if (lastUpdateDate != null) {
     this.lastUpdateDate = lastUpdateDate;
+  }
+
+  if (typeof(planId) == "number") {
+    this.planId = planId;
   }
 }
 
@@ -69,6 +74,12 @@ Task.prototype.updateStatus = function(status) {
     this.newStatus = 1;
   } else {
     this.newStatus = 0;
+  }
+}
+
+Task.prototype.setPlanId = function(planId){
+  if (typeof(planId) == "number") {
+    this.planId = planId;
   }
 }
 
