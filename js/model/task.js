@@ -15,15 +15,15 @@ function Task(title, content, status, taskId, createDate, lastUpdateDate){
   }
 
   if (typeof(status) == "number") {
-    this.status = status;
+    this.status = this.newStatus = status;
   }
 
   if (title != null) {
-    this.title = title;
+    this.title = this.newTitle = title;
   }
 
   if (content != null) {
-    this.content = content;
+    this.content = this.newContent = content;
   }
 
   if (createDate != null) {
@@ -77,19 +77,11 @@ Task.prototype.updateContent = function(content){
 }
 
 Task.prototype.getTitle = function(){
-  if (this.newTitle != "") {
-    return this.newTitle;
-  }
-
-  return this.title;
+  return this.newTitle;
 }
 
 Task.prototype.getContent = function(){
-  if (this.newContent != "") {
-    return this.newContent;
-  }
-
-  return this.content;
+  return this.newContent;
 }
 
 Task.prototype.getCreateDate = function() {
@@ -119,4 +111,31 @@ Task.prototype.toHTML = function() {
           + (this.isFinished()?"完成":"未完成") + '</td><td>'
           + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
           +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a></td></tr>';
+}
+
+Task.prototype.toJSON = function() {
+  var date = new Date();
+  var year = date.getFullYear(), month=date.getMonth(), day=date.getDate();
+  var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
+
+  if (this.taskId < 0) {
+    return {
+      title:this.title,
+      content:this.content,
+      createDate:dateStr,
+      lastUpdateDate:dateStr
+    }
+  } else {
+    if (this.title != this.newTitle || this.content != this.newContent
+      || this.status != this.newStatus) {
+        return {
+          title:this.newTitle,
+          content:this.newContent,
+          createDate:this.createDate,
+          lastUpdateDate:dateStr
+        }
+    }
+
+    return null;
+  }
 }

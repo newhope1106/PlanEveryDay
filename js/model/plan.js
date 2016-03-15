@@ -11,7 +11,7 @@ function Plan(title, planId, createDate, lastUpdateDate) {
   }
 
   if (title != null) {
-    this.title = title;
+    this.title = this.newTitle = title;
   }
 
   if (createDate != null) {
@@ -45,10 +45,7 @@ Plan.prototype.updateTitle = function(title) {
 }
 
 Plan.prototype.getTitle = function(){
-  if (this.newTitle != "") {
-    return this.newTitle;
-  }
-  return this.title;
+  return this.newTitle;
 }
 
 Plan.prototype.getCreateDate = function() {
@@ -69,4 +66,25 @@ Plan.prototype.toHTML = function(){
           +'<div class="content"><div class="header">'
           + this.getTitle() + '</div><div class="description">'
           + "创建日期：" + this.createDate + '</div></div></div>'
+}
+
+Plan.prototype.toJSON = function(){
+  var date = new Date();
+  var year = date.getFullYear(), month=date.getMonth(), day=date.getDate();
+  var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
+  if (this.planId < 0) {
+    return {
+      title : this.newTitle,
+      createDate : dateStr,
+      lastUpdateDate : dateStr
+    };
+  } else {
+    if(this.title != this.newTitle) {
+      return {
+        title : this.newTitle,
+        lastUpdateDate : dateStr
+      };
+    }
+    return null;
+  }
 }
