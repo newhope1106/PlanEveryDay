@@ -20,6 +20,7 @@ var DBManager = {
     }
 
     planDB.find(filter , function(err, docResults){
+      console.log(docResults);
       var results = new Array();
       if(docResults != null) {
         var length = docResults.length;
@@ -35,7 +36,7 @@ var DBManager = {
       }
     });
   },
-  queryTask:function(planId){
+  queryTask:function(planId, callback){
     //below, we just a test
     var testLength = 10;
     var results = new Array();
@@ -48,13 +49,14 @@ var DBManager = {
   savePlan : function(plan){
     var db = this.database.planDB;
     if (plan != null) {
-      if (plan.getId() != null || plan.getId() != "") {
+      if (plan.getId() == null || plan.getId() == "") {
         db.insert(plan.toJSON(), function (err, newDoc) {   // Callback is optional
-          console.log(err);
-          console.log(newDoc);
         });
       } else {
-
+        db.update({_id:plan.getId()}, {$set : plan.toJSON()},{}, function (err, numReplaced){
+          console.log(err);
+          console.log(numReplaced);
+        });
       }
     }
   }

@@ -70,9 +70,9 @@ Plan.prototype.toHTML = function(){
 
 Plan.prototype.toJSON = function(){
   var date = new Date();
-  var year = date.getFullYear(), month=date.getMonth(), day=date.getDate();
+  var year = date.getFullYear(), month=date.getMonth()+1, day=date.getDate();
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
-  if (this.planId == "") {
+  if (this.planId == "" || this.planId == null) {
     return {
       title : this.newTitle,
       createDate : dateStr,

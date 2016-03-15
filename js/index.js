@@ -39,6 +39,7 @@ function initTaskHeaderEvent(){
       if (plan != null) {
         plan.updateTitle($("#header_title_btn").text());
         planListView.notifyDataSetChanged();
+        DBManager.savePlan(plan);
       }
     }
   });
