@@ -73,6 +73,8 @@ Plan.prototype.toJSON = function(){
   var year = date.getFullYear(), month=date.getMonth()+1, day=date.getDate();
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
   if (this.planId == "" || this.planId == null) {
+    this.createDate = dateStr;
+    this.lastUpdateDate = dateStr;
     return {
       title : this.newTitle,
       createDate : dateStr,
@@ -80,6 +82,7 @@ Plan.prototype.toJSON = function(){
     };
   } else {
     if(this.title != this.newTitle) {
+      this.lastUpdateDate = dateStr;
       return {
         title : this.newTitle,
         lastUpdateDate : dateStr

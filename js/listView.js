@@ -35,6 +35,14 @@ ListView.prototype.removeItem = function(planId){
   }
 }
 
+ListView.prototype.insertItem = function(item){
+  if (item != null) {
+    var length = this.data.length;
+    this.data[length] = item;
+    this.notifyDataSetChanged();
+  }
+}
+
 ListView.prototype.notifyDataSetChanged = function(){
   var data = this.data;
   var listView = this.listView;

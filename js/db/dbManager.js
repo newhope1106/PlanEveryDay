@@ -20,7 +20,6 @@ var DBManager = {
     }
 
     planDB.find(filter , function(err, docResults){
-      console.log(docResults);
       var results = new Array();
       if(docResults != null) {
         var length = docResults.length;
@@ -37,20 +36,35 @@ var DBManager = {
     });
   },
   queryTask:function(planId, callback){
-    //below, we just a test
-    var testLength = 10;
-    var results = new Array();
-    for (var i=0; i<testLength; i++) {
-      var task = new Task("这是任务" + i, "我一定要完成它", i%2==0?0:1, i + "",  "2016-01-" + (i<10?"0"+i:i), "none");
-      results[i] = task;
+    var taskDB = this.database.taskDB;
+
+    if(planId != null && planId != "") {
+      taskDB.find({planId:planId}, function(err, docResults){
+        var results = new Array();
+        if(docResults != null) {
+          var length = docResults.length;
+          for (var i=0; i<length; i++) {
+            var result = docResults[i];
+            var task = new Task(result.title, result.content,
+            result.status, result._id,  result.createDate, result.lastUpdateDate, result.planId);
+            results[i] = task;
+          }
+        }
+
+        if (callback != null) {
+          callback(results);
+        }
+      });
     }
-    return results;
   },
   savePlan : function(plan, callback){
     var db = this.database.planDB;
     if (plan != null) {
       if (plan.getId() == null || plan.getId() == "") {
         db.insert(plan.toJSON(), function (err, newDoc) {   // Callback is optional
+          if (callback != null) {
+            callback();
+          }
         });
       } else {
         db.update({_id:plan.getId()}, {$set : plan.toJSON()},{}, function (err, numReplaced){
@@ -68,6 +82,38 @@ var DBManager = {
     if (planId != null && planId != "") {
       var db = this.database.planDB;
       db.remove({ _id: planId }, {}, function (err, numRemoved) {
+        // numRemoved = 1
+        if (callback != null) {
+          callback();
+        }
+      });
+    }
+  },
+  saveTask : function(task, callback) {
+    var db = this.database.taskDB;
+    if (task != null) {
+      if (task.getId() == null || task.getId() == "") {
+        db.insert(task.toJSON(), function (err, newDoc) {   // Callback is optional
+          if (callback != null) {
+            callback();
+          }
+        });
+      } else {
+        db.update({_id:task.getId()}, {$set : task.toJSON()},{}, function (err, numReplaced){
+          console.log(err);
+          console.log(numReplaced);
+
+          if (callback != null) {
+            callback();
+          }
+        });
+      }
+    }
+  },
+  deleteTask : function(taskId, callback){
+    if (taskId != null && taskId != "") {
+      var db = this.database.taskDB;
+      db.remove({ _id: taskId }, {}, function (err, numRemoved) {
         // numRemoved = 1
         if (callback != null) {
           callback();

@@ -111,6 +111,10 @@ Task.prototype.isFinished = function() {
   return false;
 }
 
+Task.prototype.getStatus = function(){
+  return this.newStatus;
+}
+
 Task.prototype.getId = function() {
   return this.taskId;
 }
@@ -130,16 +134,20 @@ Task.prototype.toJSON = function() {
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
 
   if (this.taskId == null || this.taskId == "") {
+    this.createDate = dateStr;
+    this.lastUpdateDate = dateStr;
     return {
       title:this.title,
       content:this.content,
       status:this.newStatus,
+      planId:this.planId,
       createDate:dateStr,
       lastUpdateDate:dateStr
     }
   } else {
     if (this.title != this.newTitle || this.content != this.newContent
       || this.status != this.newStatus) {
+        this.lastUpdateDate = dateStr;
         var updateJSON = {};
         if (this.title != this.newTitle) {
           updateJSON.title = this.newTitle;
@@ -152,6 +160,8 @@ Task.prototype.toJSON = function() {
         if (this.status != this.newStatus) {
           updateJSON.status = this.newStatus;
         }
+
+        updateJSON.lastUpdateDate = dateStr;
         return updateJSON;
     }
 

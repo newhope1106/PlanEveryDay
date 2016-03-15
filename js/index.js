@@ -105,13 +105,27 @@ function initClickEvents(){
   });
 
   $("#task_save_btn").click(function(){
-    alert($("#task_title").val() + ", " + $("#task_content").val()
-    + ", " + $("#task_id_input").val());
+    var taskId = $("#task_id_input").val();
+
+    var task = null;
+    if(taskId == null || taskId == "") {
+      task = new Task($("#task_title").val(), $("#task_content").val(),
+          $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"));
+    } else {
+      task = taskListView.getItemById(taskId);
+      task.updateTitle($("#task_title").val());
+      task.updateContent($("#task_content").val());
+    }
+    DBManager.saveTask(task);
   });
 
   $("#plan_save_btn").click(function(){
     var plan = new Plan($("#plan_title").val(), null, null, null);
-    DBManager.savePlan(plan);
+    DBManager.savePlan(plan, function(){
+      if(planListView != null) {
+        planListView.insertItem(plan);
+      }
+    });
   });
 }
 
@@ -133,8 +147,9 @@ function deleteTask(taskId){
   if (taskListView != null){
     var task = taskListView.getItemById(taskId);
     if (task!= null) {
-      taskListView.removeItem(taskId);
-      task.delete();
+      DBManager.deleteTask(taskId, function(){
+        taskListView.removeItem(taskId);
+      });
     }
   }
 }
@@ -175,15 +190,16 @@ function queryPlanData(date, keyword){
 ** @param planId 计划id
 */
 function queryTaskData(planId){
-  var results = DBManager.queryTask(planId);
-  var plan = planListView.getItemById(planId);
-  $("#header_title_btn").text(plan.getTitle());
-  $("#title_input").val($("#header_title_btn").text());
-  $("#header_title_btn").attr("attr-plan-id", planId);
+  var results = DBManager.queryTask(planId, function(results){
+    var plan = planListView.getItemById(planId);
+    $("#header_title_btn").text(plan.getTitle());
+    $("#title_input").val($("#header_title_btn").text());
+    $("#header_title_btn").attr("attr-plan-id", planId);
 
-  if (taskListView != null) {
-    taskListView.changeData(results);
-  }
+    if (taskListView != null) {
+      taskListView.changeData(results);
+    }
+  });
 }
 
 /**
