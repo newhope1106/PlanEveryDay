@@ -46,7 +46,7 @@ var DBManager = {
     }
     return results;
   },
-  savePlan : function(plan){
+  savePlan : function(plan, callback){
     var db = this.database.planDB;
     if (plan != null) {
       if (plan.getId() == null || plan.getId() == "") {
@@ -56,8 +56,23 @@ var DBManager = {
         db.update({_id:plan.getId()}, {$set : plan.toJSON()},{}, function (err, numReplaced){
           console.log(err);
           console.log(numReplaced);
+
+          if (callback != null) {
+            callback();
+          }
         });
       }
+    }
+  },
+  deletePlan : function(planId, callback){
+    if (planId != null && planId != "") {
+      var db = this.database.planDB;
+      db.remove({ _id: planId }, {}, function (err, numRemoved) {
+        // numRemoved = 1
+        if (callback != null) {
+          callback();
+        }
+      });
     }
   }
 }

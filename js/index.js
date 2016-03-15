@@ -38,8 +38,9 @@ function initTaskHeaderEvent(){
       var plan = planListView.getItemById(planId);
       if (plan != null) {
         plan.updateTitle($("#header_title_btn").text());
-        planListView.notifyDataSetChanged();
-        DBManager.savePlan(plan);
+        DBManager.savePlan(plan, function(){
+          planListView.notifyDataSetChanged();
+        });
       }
     }
   });
@@ -121,7 +122,9 @@ function deletePlan(planId){
   }
 
   if (planListView != null){
-    planListView.removeItem(planId);
+    DBManager.deletePlan(planId, function(){
+      planListView.removeItem(planId);
+    });
   }
 }
 
