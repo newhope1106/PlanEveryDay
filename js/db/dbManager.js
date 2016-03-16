@@ -16,7 +16,7 @@ var DBManager = {
     }
 
     if (keyword != null && keyword != "") {
-      filter.title = keyword;
+      filter.title = {$regex : eval('/' + keyword + '/')};
     }
 
     planDB.find(filter).sort({createDate : -1}).exec(function(err, docResults){
