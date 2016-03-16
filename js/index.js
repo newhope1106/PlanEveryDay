@@ -157,7 +157,7 @@ function deleteTask(taskId){
 //初始化计划列表
 function initPlanListView(){
   planListView = new ListView();
-  planListView.setEmptyView($("#plan_list"));
+  //planListView.setEmptyView($("#plan_list"));
   planListView.setListView($("#list_items_container"));
 }
 
@@ -179,6 +179,13 @@ function showPlanPopup() {
 function queryPlanData(date, keyword){
   DBManager.searchPlan(date, keyword, 0,function(results){
     if (planListView != null) {
+      if (results.length > 0) {
+        $("#list_items_container").css("display", "block");
+        $("#plan_list_empty_view").css("display", "none");
+      } else {
+        $("#list_items_container").css("display", "none");
+        $("#plan_list_empty_view").css("display", "block");
+      }
       planListView.changeData(results);
     }
   });

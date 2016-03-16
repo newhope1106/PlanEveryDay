@@ -79,8 +79,11 @@
       </label>
     </div>
     <div id="date_picker" style="min-width:300px;min-height:300px;" class="ui custom popup center bottom transition hidden"></div>
-    <div class="ui segment" id="plan_list" style="min-height:350px;max-height:80%;overflow-y:auto;overflow-x:hidden;text-align:left;visibility:hidden;">
-      <div class="ui relaxed animated  divided list middle aligned selection" id="list_items_container">
+    <div class="ui segment" id="plan_list" style="min-height:350px;max-height:80%;overflow-y:auto;overflow-x:hidden;text-align:left;">
+      <div class="ui relaxed animated  divided list middle aligned selection" style="display:none;" id="list_items_container">
+      </div>
+      <div id="plan_list_empty_view" style="width:100%;height:300px;font-size:24px;line-height:300px;text-align:center;vertical-align:middle;">
+        无结果
       </div>
     </div>
   </div>
@@ -115,11 +118,6 @@
             <tr><th>任务标题</th><th>状态</th><th></th></tr>
           </thead>
           <tbody id="task_table"></tbody>
-          <tfoot>
-            <tr><th>3个 任务</th>
-            <th>1个 已完成</th>
-            <th></th>
-          </tr></tfoot>
         </table>
     </div>
   </div>
