@@ -94,8 +94,13 @@ var DBManager = {
       var db = this.database.planDB;
       db.remove({ _id: planId }, {}, function (err, numRemoved) {
         // numRemoved = 1
-        if (numRemoved > 0 && callback != null) {
-          callback();
+        if(numRemoved > 0) {
+          var taskDB = DBManager.database.taskDB;
+          taskDB.remove({planId:planId}, {}, function(){
+            if (callback != null) {
+              callback();
+            }
+          });
         }
       });
     }

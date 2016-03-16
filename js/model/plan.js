@@ -31,7 +31,7 @@ Plan.prototype.getTitle = function(){
   return this.newTitle;
 }
 
-Plan.prototype.setTtitle = function(title) {
+Plan.prototype.setTitle = function(title) {
   this.title = this.newTitle = title;
 }
 
