@@ -19,7 +19,7 @@ var DBManager = {
       filter.title = keyword;
     }
 
-    planDB.find(filter , function(err, docResults){
+    planDB.find(filter).sort({createDate : -1}).exec(function(err, docResults){
       var results = new Array();
       if(docResults != null) {
         var length = docResults.length;
