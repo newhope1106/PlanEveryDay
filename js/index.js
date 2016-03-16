@@ -111,12 +111,20 @@ function initClickEvents(){
     if(taskId == null || taskId == "") {
       task = new Task($("#task_title").val(), $("#task_content").val(),
           $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"));
+      DBManager.saveTask(task, function(){
+        if(taskListView != null) {
+          taskListView.insertItem(task);
+        }
+      });
     } else {
       task = taskListView.getItemById(taskId);
       task.updateTitle($("#task_title").val());
       task.updateContent($("#task_content").val());
+
+      DBManager.saveTask(task, function(){
+        taskListView.notifyDataSetChanged();
+      });
     }
-    DBManager.saveTask(task);
   });
 
   $("#plan_save_btn").click(function(){
@@ -233,10 +241,10 @@ function showTaskPopup(header, taskId, title, content) {
     $("#task_content").val("");
   }
 
-  if (typeof(taskId) == "number" || typeof(taskId) == "string") {
+  if (taskId != null && taskId != "") {
     $("#task_id_input").val(taskId);
   } else{
-    $("#task_id_input").val(-1);
+    $("#task_id_input").val("");
   }
 
   $("#task_modal").modal('setting', 'closable', false).modal('show');

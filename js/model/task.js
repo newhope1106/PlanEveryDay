@@ -40,33 +40,24 @@ function Task(title, content, status, taskId, createDate, lastUpdateDate, planId
   }
 }
 
-Task.prototype.save = function(){
-  if (this.taskId == -1) {
-    //insert operation
-  } else {
-    //update operation;
-    if(this.title != this.newTitle) {
-
-    }
-
-    if(this.content != this.newContent) {
-
-    }
-  }
-}
-
-Task.prototype.delete = function() {
-  if (this.taskId != null) {
-
-  }
+Task.prototype.setId = function(id) {
+  this.taskId = id;
 }
 
 Task.prototype.updateTitle = function(title) {
   this.newTitle = title;
 }
 
+Task.prototype.setTitle = function(title){
+  this.title = this.newTitle = title;
+}
+
 Task.prototype.updateContent = function(content){
   this.newContent = content;
+}
+
+Task.prototype.setContent = function(content) {
+  this.content = this.newContent = content;
 }
 
 Task.prototype.updateStatus = function(status) {
@@ -77,14 +68,14 @@ Task.prototype.updateStatus = function(status) {
   }
 }
 
+Task.prototype.setStatus = function(status) {
+  this.status = this.newStatus = status;
+}
+
 Task.prototype.setPlanId = function(planId){
   if (planId != null) {
     this.planId = planId;
   }
-}
-
-Task.prototype.updateContent = function(content){
-  this.newContent = content;
 }
 
 Task.prototype.getTitle = function(){
@@ -99,8 +90,16 @@ Task.prototype.getCreateDate = function() {
   return this.createDate;
 }
 
+Task.prototype.setCreateDate = function(createDate) {
+  this.createDate = createDate;
+}
+
 Task.prototype.getLastUpdateDate = function() {
   return this.lastUpdateDate;
+}
+
+Task.prototype.setLastUpdateDate = function(lastUpdateDate) {
+  this.lastUpdateDate = lastUpdateDate;
 }
 
 Task.prototype.isFinished = function() {
@@ -134,8 +133,6 @@ Task.prototype.toJSON = function() {
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
 
   if (this.taskId == null || this.taskId == "") {
-    this.createDate = dateStr;
-    this.lastUpdateDate = dateStr;
     return {
       title:this.title,
       content:this.content,
@@ -147,7 +144,6 @@ Task.prototype.toJSON = function() {
   } else {
     if (this.title != this.newTitle || this.content != this.newContent
       || this.status != this.newStatus) {
-        this.lastUpdateDate = dateStr;
         var updateJSON = {};
         if (this.title != this.newTitle) {
           updateJSON.title = this.newTitle;

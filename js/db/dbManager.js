@@ -62,6 +62,12 @@ var DBManager = {
     if (plan != null) {
       if (plan.getId() == null || plan.getId() == "") {
         db.insert(plan.toJSON(), function (err, newDoc) {   // Callback is optional
+          if(newDoc != null) {//数据一致性
+            plan.setId(newDoc._id);
+            plan.setCreateDate(newDoc.createDate);
+            plan.setLastUpdateDate(newDoc.lastUpdateDate);
+          }
+
           if (callback != null) {
             callback();
           }
@@ -70,6 +76,11 @@ var DBManager = {
         db.update({_id:plan.getId()}, {$set : plan.toJSON()},{}, function (err, numReplaced){
           console.log(err);
           console.log(numReplaced);
+          if (numReplaced > 0) {//数据一致性
+            plan.setTitle(plan.getTitle());
+            plan.setCreateDate(plan.getCreateDate());
+            plan.setLastUpdateDate(plan.getLastUpdateDate());
+          }
 
           if (callback != null) {
             callback();
@@ -94,6 +105,12 @@ var DBManager = {
     if (task != null) {
       if (task.getId() == null || task.getId() == "") {
         db.insert(task.toJSON(), function (err, newDoc) {   // Callback is optional
+          if (newDoc != null) {//数据一致性
+            task.setId(newDoc._id);
+            task.setPlanId(newDoc.planId);
+            task.setCreateDate(newDoc.createDate);
+            task.setLastUpdateDate(newDoc.lastUpdateDate);
+          }
           if (callback != null) {
             callback();
           }
@@ -102,6 +119,14 @@ var DBManager = {
         db.update({_id:task.getId()}, {$set : task.toJSON()},{}, function (err, numReplaced){
           console.log(err);
           console.log(numReplaced);
+
+          if (numReplaced > 0) {//数据一致性
+            task.setTitle(task.getTitle());
+            task.setContent(task.getContent());
+            task.setStatus(task.getStatus());
+            task.setCreateDate(task.getCreateDate());
+            task.setLastUpdateDate(task.getLastUpdateDate());
+          }
 
           if (callback != null) {
             callback();

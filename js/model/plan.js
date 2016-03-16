@@ -23,23 +23,6 @@ function Plan(title, planId, createDate, lastUpdateDate) {
   }
 }
 
-Plan.prototype.save = function(){
-  if (this.planId != "") {
-    //insert operation
-  } else {
-    //update operation;
-    if(this.title != this.newTitle) {
-
-    }
-  }
-}
-
-Plan.prototype.delete = function() {
-  if (this.planId != "") {
-
-  }
-}
-
 Plan.prototype.updateTitle = function(title) {
   this.newTitle = title;
 }
@@ -48,16 +31,32 @@ Plan.prototype.getTitle = function(){
   return this.newTitle;
 }
 
+Plan.prototype.setTtitle = function(title) {
+  this.title = this.newTitle = title;
+}
+
 Plan.prototype.getCreateDate = function() {
   return this.createDate;
+}
+
+Plan.prototype.setCreateDate = function(createDate) {
+  this.createDate = createDate;
 }
 
 Plan.prototype.getLastUpdateDate = function() {
   return this.lastUpdateDate;
 }
 
+Plan.prototype.setLastUpdateDate = function(lastUpdateDate) {
+  this.lastUpdateDate = lastUpdateDate;
+}
+
 Plan.prototype.getId = function(){
   return this.planId;
+}
+
+Plan.prototype.setId = function(id) {
+  this.planId = id;
 }
 
 Plan.prototype.toHTML = function(){
@@ -73,8 +72,6 @@ Plan.prototype.toJSON = function(){
   var year = date.getFullYear(), month=date.getMonth()+1, day=date.getDate();
   var dateStr = year + "-" + ((month<10)?"0"+month:month) + "-" + ((day<10)?"0"+day:day);
   if (this.planId == "" || this.planId == null) {
-    this.createDate = dateStr;
-    this.lastUpdateDate = dateStr;
     return {
       title : this.newTitle,
       createDate : dateStr,
@@ -82,7 +79,6 @@ Plan.prototype.toJSON = function(){
     };
   } else {
     if(this.title != this.newTitle) {
-      this.lastUpdateDate = dateStr;
       return {
         title : this.newTitle,
         lastUpdateDate : dateStr
