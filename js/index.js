@@ -67,7 +67,7 @@ function initTaskContentEvents(){
     var taskId = $(this).attr("attr-id");
     var task = taskListView.getItemById(taskId);
 
-    showTaskPopup($("#header_title_btn").text(), taskId, task.getTitle(), task.getContent());
+    showTaskPopup($("#header_title_btn").text(), taskId, task.getTitle(), task.getContent(), task.isFinished());
   })
 
   $("#task_table").on("click", ".task_delete_link", function(){
@@ -106,11 +106,11 @@ function initClickEvents(){
 
   $("#task_save_btn").click(function(){
     var taskId = $("#task_id_input").val();
-
+    var status = $("#task_status_checkbox").hasClass("checked")?1:0;
     var task = null;
     if(taskId == null || taskId == "") {
       task = new Task($("#task_title").val(), $("#task_content").val(),
-          $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"));
+          $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"), status);
       DBManager.saveTask(task, function(){
         if(taskListView != null) {
           taskListView.insertItem(task);
@@ -120,6 +120,7 @@ function initClickEvents(){
       task = taskListView.getItemById(taskId);
       task.updateTitle($("#task_title").val());
       task.updateContent($("#task_content").val());
+      task.updateStatus(status);
 
       DBManager.saveTask(task, function(){
         taskListView.notifyDataSetChanged();
@@ -135,6 +136,8 @@ function initClickEvents(){
       }
     });
   });
+
+  $("#task_status_checkbox").checkbox();
 }
 
 //删除计划
@@ -224,7 +227,7 @@ function queryTaskData(planId){
 ** @param title 任务title
 ** @param content 任务内容
 */
-function showTaskPopup(header, taskId, title, content) {
+function showTaskPopup(header, taskId, title, content, isFinished) {
   if(header != null) {
     $("#task_header_name").text(header);
   }
@@ -245,6 +248,14 @@ function showTaskPopup(header, taskId, title, content) {
     $("#task_id_input").val(taskId);
   } else{
     $("#task_id_input").val("");
+  }
+
+  if(isFinished != null) {
+    if (isFinished) {
+      $("#task_status_checkbox").addClass("checked");
+    } else {
+      $("#task_status_checkbox").removeClass("checked");
+    }
   }
 
   $("#task_modal").modal('setting', 'closable', false).modal('show');

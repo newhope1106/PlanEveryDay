@@ -61,11 +61,7 @@ Task.prototype.setContent = function(content) {
 }
 
 Task.prototype.updateStatus = function(status) {
-  if (status) {
-    this.newStatus = 1;
-  } else {
-    this.newStatus = 0;
-  }
+  this.newStatus = status;
 }
 
 Task.prototype.setStatus = function(status) {
