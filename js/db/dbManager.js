@@ -94,7 +94,7 @@ var DBManager = {
       var db = this.database.planDB;
       db.remove({ _id: planId }, {}, function (err, numRemoved) {
         // numRemoved = 1
-        if (callback != null) {
+        if (numRemoved > 0 && callback != null) {
           callback();
         }
       });

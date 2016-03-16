@@ -131,9 +131,9 @@ function initClickEvents(){
   $("#plan_save_btn").click(function(){
     var plan = new Plan($("#plan_title").val(), null, null, null);
     DBManager.savePlan(plan, function(){
-      if(planListView != null) {
-        planListView.insertItem(plan);
-      }
+      var date = $("#date_label").text();
+      var keyword = $("#search_keyword").val();
+      queryPlanData(date, keyword);
     });
   });
 
@@ -149,6 +149,11 @@ function deletePlan(planId){
   if (planListView != null){
     DBManager.deletePlan(planId, function(){
       planListView.removeItem(planId);
+      var count = planListView.getCount();
+      if(count <= 0){
+        $("#list_items_container").css("display", "none");
+        $("#plan_list_empty_view").css("display", "block");
+      }
     });
   }
 }

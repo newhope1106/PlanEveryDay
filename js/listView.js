@@ -82,6 +82,7 @@ ListView.prototype.getItemById = function (id){
 }
 
 ListView.prototype.getCount = function(){
+  var data = this.data;
   if (data != null) {
     return data.length;
   }
