@@ -18,7 +18,7 @@ var template = [
         }
       },
       {
-        label: '帮助',
+        label: '关于',
         click: function(item, focusedWindow) {
 
         }
@@ -45,7 +45,7 @@ var template = [
 //         }
 //       },
 //       {
-//         label: '帮助',
+//         label: '关于',
 //         click: function(item, focusedWindow) {
 //
 //         }
