@@ -14,7 +14,7 @@ var template = [
       {
         label: '统计',
         click: function(item, focusedWindow) {
-
+          showStasticInfo();
         }
       },
       {
