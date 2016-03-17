@@ -150,5 +150,24 @@ var DBManager = {
         }
       });
     }
+  },
+  stastic : function(callback){
+    var planDB = this.database.planDB;
+    var taskDB = this.database.taskDB;
+    planDB.count({}, function(err, totalPlanCount){
+      if (totalPlanCount > 0) {
+        taskDB.count({}, function(err, totalTaskCount){
+          taskDB.count({status:{$gt:0}}, function(err, completedTaskCount){
+            if (callback != null) {
+              callback(totalPlanCount, totalTaskCount, completedTaskCount);
+            }
+          });
+        })
+      } else {
+        if (callback != null) {
+          callback(0, 0, 0);
+        }
+      }
+    });
   }
 }

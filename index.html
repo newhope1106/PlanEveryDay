@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
 <script>
   window.$ = window.jQuery = require("jquery");
+  window.echarts = require("./js/echarts.js");
 </script>
 <script type="text/javascript" src="./js/semantic.js"></script>
 <script type="text/javascript" src="./js/calendar.js"></script>
@@ -24,6 +25,7 @@
 
 <script type="text/javascript" src="./js/listView.js"></script>
 <script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/stastic.js"></script>
 <script type="text/javascript" src="./js/utils/hashMap.js"></script>
 <script type="text/javascript" src="./js/db/dbManager.js"></script>
 <script type="text/javascript" src="./js/model/plan.js"></script>
@@ -165,6 +167,9 @@
     <div class="ui negative button">取消</div>
     <div class="ui positive right labeled icon button" id="plan_save_btn">保存 <i class="checkmark icon"></i> </div>
   </div>
+</div>
+<div class="ui modal" id="linear_modal" style="text-align:center;padding-bottom:10px;">
+  <div class="canvasContent" id="pop_canvas" style="width:600px;height:400px;margin:10px auto;"></div>
 </div>
 </body>
 </html>

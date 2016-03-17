@@ -108,8 +108,13 @@ function initClickEvents(){
     var taskId = $("#task_id_input").val();
     var status = $("#task_status_checkbox").hasClass("checked")?1:0;
     var task = null;
+    var taskTitle = $("#task_title").val();
+    if (taskTitle==null || taskTitle == "") {
+      showToast("任务标题不能为空");
+      return ;
+    }
     if(taskId == null || taskId == "") {
-      task = new Task($("#task_title").val(), $("#task_content").val(),
+      task = new Task(taskTitle , $("#task_content").val(),
           $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"), status);
       DBManager.saveTask(task, function(){
         if(taskListView != null) {
