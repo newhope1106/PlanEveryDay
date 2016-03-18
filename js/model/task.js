@@ -115,9 +115,9 @@ Task.prototype.getId = function() {
 }
 
 Task.prototype.toHTML = function() {
-  return '<tr><td><div class="title active"><i class="dropdown icon"></i>'
-          + this.getTitle() + '</div><div class="content"><p style="display: block ! important;" class="transition visible">'
-          + this.getContent() + '</p></div></td><td>'
+  return '<tr><td><div class="ui accordion"><div class="title"><i class="dropdown icon"></i>'
+          + this.getTitle() + '</div><div class="content"><p class="transition hidden">'
+          + this.getContent() + '</p></div></div></td><td>'
           + (this.isFinished()?"完成":"未完成") + '</td><td>'
           + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
           +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a></td></tr>';

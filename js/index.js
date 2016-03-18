@@ -2,7 +2,6 @@ var planListView=null, taskListView=null;
 
 $(document).ready(function(){
   DBManager.init();//初始化数据库
-
   initPlanListView();
   initTaskListView();
 
@@ -226,6 +225,7 @@ function queryTaskData(planId){
 
     if (taskListView != null) {
       taskListView.changeData(results);
+      $('.ui.accordion').accordion();
     }
   });
 }
