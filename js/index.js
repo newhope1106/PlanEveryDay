@@ -376,3 +376,7 @@ function initializeEditorIfNeeded() {
     // }
   }
 }
+
+function showAboutPopup() {
+  $("#about_modal").modal("show");
+}

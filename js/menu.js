@@ -20,7 +20,7 @@ var template = [
       {
         label: '关于',
         click: function(item, focusedWindow) {
-
+          showAboutPopup();
         }
       }
     ]
