@@ -98,6 +98,14 @@ function initPlanListEvents(){
 
   attachContextEvent("#plan_list", "plan");
   attachContextEvent("#list_items_container", "task", ".item");
+
+  //添加滑动列表事件
+  $("#plan_list").bind('mousewheel', function(event) {
+    event.preventDefault();
+    var scrollTop = this.scrollTop;
+    this.scrollTop = (scrollTop + ((event.deltaY * event.deltaFactor) * -1));
+    //console.log(event.deltaY, event.deltaFactor, event.originalEvent.deltaMode, event.originalEvent.wheelDelta);
+  });
 }
 
 //初始化点击事件
