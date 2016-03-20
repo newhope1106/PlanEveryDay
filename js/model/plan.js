@@ -60,11 +60,11 @@ Plan.prototype.setId = function(id) {
 }
 
 Plan.prototype.toHTML = function(){
-  return '<div class="item" attr-id='
-          + this.planId +'><i class="file icon"></i>'
-          +'<div class="content"><div class="header">'
-          + this.getTitle() + '</div><div class="description">'
-          + "创建日期：" + this.createDate + '</div></div></div>'
+  return '<a class="item" attr-id='
+          + this.planId +'>'
+          + this.getTitle() + '<p>'
+          + "创建日期：" + this.createDate
+          + '</p></a>';
 }
 
 Plan.prototype.toJSON = function(){

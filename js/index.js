@@ -11,6 +11,8 @@ $(document).ready(function(){
   initPlanListEvents();
 
   initClickEvents();
+
+  queryPlanData();
 });
 
 //初始化任务栏的计划标题事件
