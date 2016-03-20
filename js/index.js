@@ -86,6 +86,15 @@ function initTaskContentEvents(){
 
 //初始化列表的菜单和点击事件
 function initPlanListEvents(){
+  //输入框添加回车事件
+  $("#search_keyword").keydown(function(e){
+    if (e.keyCode == 13) {
+      var date = $("#date_label").text();
+      var keyword = $("#search_keyword").val();
+      queryPlanData(date, keyword);
+    }
+  });
+
   //每个计划列表的元素添加点击事件
   $("#list_items_container").on("click", ".item",  function(){
     var planItem = $(this);
