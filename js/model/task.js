@@ -115,12 +115,15 @@ Task.prototype.getId = function() {
 }
 
 Task.prototype.toHTML = function() {
-  return '<tr><td><div class="ui accordion"><div class="title"><i class="dropdown icon"></i>'
-          + this.getTitle() + '</div><div class="content"><p class="transition hidden">'
-          + this.getContent() + '</p></div></div></td><td>'
-          + (this.isFinished()?"完成":"未完成") + '</td><td>'
-          + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
-          +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a></td></tr>';
+  return '<div class="item">'
+        + '<div class="content">'
+        + '<a class="header">' + this.getTitle() + '</a>'
+        + '&nbsp;&nbsp;' + (this.isFinished()?"完成":"未完成")
+        + '<div class="description">'
+        + '最近更新时间:' + this.getLastUpdateDate()
+        + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
+        +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a>'
+        +'</div>';
 }
 
 Task.prototype.toJSON = function() {

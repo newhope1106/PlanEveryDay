@@ -17,28 +17,28 @@ $(document).ready(function(){
 
 //初始化任务栏的计划标题事件
 function initTaskHeaderEvent(){
-  $("#header_title_btn").popup({
+  $("#header_task_title").popup({
     popup:$('#popup_header_title_edit'),
     on: 'click'
   });
 
   $("#save_title_btn").click(function(){
-    var oldTitleValue = $("#header_title_btn").text();
+    var oldTitleValue = $("#header_task_title").text();
     var newTitleValue = $("#title_input").val();
     if(newTitleValue == null || newTitleValue=="") {
       showToast("标题不能为空");
     } else if(newTitleValue != oldTitleValue){
-      $("#header_title_btn").text(newTitleValue);
+      $("#header_task_title").text(newTitleValue);
     }
-    $("#header_title_btn").popup("hide");
+    $("#header_task_title").popup("hide");
 
-    $("#title_input").val($("#header_title_btn").text());
+    $("#title_input").val($("#header_task_title").text());
 
-    var planId = $("#header_title_btn").attr("attr-plan-id");
+    var planId = $("#header_task_title").attr("attr-plan-id");
     if(planListView != null){
       var plan = planListView.getItemById(planId);
       if (plan != null) {
-        plan.updateTitle($("#header_title_btn").text());
+        plan.updateTitle($("#header_task_title").text());
         DBManager.savePlan(plan, function(){
           planListView.notifyDataSetChanged();
         });
@@ -48,12 +48,12 @@ function initTaskHeaderEvent(){
 
   //新建任务
   $("#new_task_btn").click(function(){
-    showTaskPopup($("#header_title_btn").text());
+    showTaskPopup($("#header_task_title").text());
   });
 
   $("#delete_all_btn").click(function(){
     deleteAlertDialog("确定要删除?", "将会删除计划的所有任务!", "warning", function(callback){
-      deletePlan($("#header_title_btn").attr("attr-plan-id"));
+      deletePlan($("#header_task_title").attr("attr-plan-id"));
 
       if (callback != null) {
         callback("该计划的所有任务都被删除");
@@ -64,14 +64,14 @@ function initTaskHeaderEvent(){
 
 //初始化任务的编辑和删除事件
 function initTaskContentEvents(){
-  $("#task_table").on("click", ".task_edit_link", function(){
+  $("#task_list").on("click", ".task_edit_link", function(){
     var taskId = $(this).attr("attr-id");
     var task = taskListView.getItemById(taskId);
 
-    showTaskPopup($("#header_title_btn").text(), taskId, task.getTitle(), task.getContent(), task.isFinished());
+    showTaskPopup($("#header_task_title").text(), taskId, task.getTitle(), task.getContent(), task.isFinished());
   })
 
-  $("#task_table").on("click", ".task_delete_link", function(){
+  $("#task_list").on("click", ".task_delete_link", function(){
     var taskId = $(this).attr("attr-id");
 
     deleteAlertDialog("确定要删除?", "将会删除该任务!", "warning", function(callback){
@@ -136,7 +136,7 @@ function initClickEvents(){
     }
     if(taskId == null || taskId == "") {
       task = new Task(taskTitle , $("#task_content").val(),
-          $("#task_id_input").val(), 0, null, null, $("#header_title_btn").attr("attr-plan-id"), status);
+          $("#task_id_input").val(), 0, null, null, $("#header_task_title").attr("attr-plan-id"), status);
       DBManager.saveTask(task, function(){
         if(taskListView != null) {
           taskListView.insertItem(task);
@@ -168,7 +168,7 @@ function initClickEvents(){
 
 //删除计划
 function deletePlan(planId){
-  if ($("#header_title_btn").attr("attr-plan-id") == planId) {
+  if ($("#header_task_title").attr("attr-plan-id") == planId) {
     translateToAboutContent();
   }
 
@@ -206,7 +206,7 @@ function initPlanListView(){
 //初始化任务列表
 function initTaskListView(){
   taskListView = new ListView();
-  taskListView.setListView($("#task_table"));
+  taskListView.setListView($("#task_list"));
 }
 
 //显示新建计划弹出框
@@ -241,9 +241,9 @@ function queryPlanData(date, keyword){
 function queryTaskData(planId){
   var results = DBManager.queryTask(planId, function(results){
     var plan = planListView.getItemById(planId);
-    $("#header_title_btn").text(plan.getTitle());
-    $("#title_input").val($("#header_title_btn").text());
-    $("#header_title_btn").attr("attr-plan-id", planId);
+    $("#header_task_title").text(plan.getTitle());
+    $("#title_input").val($("#header_task_title").text());
+    $("#header_task_title").attr("attr-plan-id", planId);
 
     if (taskListView != null) {
       taskListView.changeData(results);
