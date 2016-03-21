@@ -94,8 +94,7 @@
   <div style="float:left; width:70%;text-align:center;padding-bottom:50px;display:none;" id="task_container">
     <div class="ui card" style="width:80%;margin:auto;">
       <div class="content" style="width:100%;max-height:20%;vertical:middle;margin:auto;">
-        <p id="header_task_title" attr-plan-id="-1"></p>
-        <button class="ui button" attr-plan-id="-1" id="header_title_btn" style="min-width:40%;"></button>
+        <label id="header_task_title" attr-plan-id="-1"></label>
         <div class="ui flowing popup bottom left transition hidden" id="popup_header_title_edit">
           <div class="ui action input">
             <input placeholder="输入新标题" type='text' id="title_input">
@@ -107,20 +106,10 @@
         <div class="ui relaxed divided list" style="text-align:left;" id="task_list">
         </div>
     </div>
-    <div class="ui icon basic buttons right floated" style="min-width:200px;">
-      <div class="ui animated button" tabindex="0" id="delete_all_btn">
-        <div class="visible content"><i class="minus circle icon"></i></div>
-        <div class="hidden content">
-          删除
-        </div>
-      </div>
-      <div class="ui animated button" tabindex="0" id="new_task_btn">
-        <div class="visible content"><i class="add circle icon"></i></div>
-        <div class="hidden content">
-          新建任务
-        </div>
-      </div>
-    </div>
+    <div class="ui divider"></div>
+    <a id="header_title_btn"><i class="edit icon"></i>编辑标题</a>&nbsp;&nbsp;
+    <a id="new_task_btn"><i class="add circle icon"></i></i>新建任务</a>&nbsp;&nbsp;
+    <a id="delete_all_btn"><i class="remove circle icon"></i>删除计划</a>
   </div>
 </div>
 <div style="float:left;width:68%;height:100%;text-align:center;padding-bottom:50px;border-left:solid 1px #EEE;margin-left:5px;" id="about_container">

@@ -117,7 +117,7 @@ Task.prototype.getId = function() {
 Task.prototype.toHTML = function() {
   return '<div class="item">'
         + '<div class="content">'
-        + '<a class="header">' + this.getTitle() + '</a>'
+        + this.getTitle()
         + '&nbsp;&nbsp;' + (this.isFinished()?"完成":"未完成")
         + '<div class="description">'
         + '最近更新时间:' + this.getLastUpdateDate()
