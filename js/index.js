@@ -17,9 +17,9 @@ $(document).ready(function(){
 
 //初始化任务栏的计划标题事件
 function initTaskHeaderEvent(){
-  $("#header_task_title").popup({
-    popup:$('#popup_header_title_edit'),
-    on: 'click'
+  $("#header_title_btn").click(function(){
+    $("#header_task_title").css("display", "none");
+    $("#header_title_edit").css("display", "inline-flex");
   });
 
   $("#save_title_btn").click(function(){
@@ -30,7 +30,9 @@ function initTaskHeaderEvent(){
     } else if(newTitleValue != oldTitleValue){
       $("#header_task_title").text(newTitleValue);
     }
-    $("#header_task_title").popup("hide");
+
+    $("#header_task_title").css("display", "inline");
+    $("#header_title_edit").css("display", "none");
 
     $("#title_input").val($("#header_task_title").text());
 
