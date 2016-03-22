@@ -116,14 +116,16 @@ Task.prototype.getId = function() {
 
 Task.prototype.toHTML = function() {
   return '<div class="item">'
-        + '<div class="content">'
-        + this.getTitle()
-        + '&nbsp;&nbsp;' + (this.isFinished()?"完成":"未完成")
-        + '<div class="description">'
+        + '<div class="ui message">'
+        + '<div class="header">' + this.getTitle() + '</div>'
+        + '<div class="description" style="margin-top:10px;">'
         + '最近更新时间:' + this.getLastUpdateDate()
-        + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#">edit</a>&nbsp;&nbsp;'
-        +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#">delete</a>'
-        +'</div>';
+        + '&nbsp;&nbsp;' + (this.isFinished()?"<span style='color:#00B5AD;'>完成</span>":"<span style='color:#DE321D;'>未完成</span>")
+        + '<div style="float:right;">'
+        + '<a attr-id=' +  this.taskId + ' class="task_view_link" href="#"><i class="unhide icon"></i></a>&nbsp;&nbsp;'
+        + '<a attr-id=' + this.taskId + ' class="task_edit_link" href="#"><i class="write icon"></i></a>&nbsp;&nbsp;'
+        +'<a attr-id=' + this.taskId + ' class="task_delete_link" href="#"><i class="remove icon"></i></a>'
+        +'</div></div>';
 }
 
 Task.prototype.toJSON = function() {
