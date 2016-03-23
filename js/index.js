@@ -58,7 +58,7 @@ function initTaskHeaderEvent(){
 
   //新建任务
   $("#new_task_btn").click(function(){
-    showTaskPopup($("#header_task_title").text());
+    showTaskEditView($("#header_task_title").text());
   });
 
   $("#delete_all_btn").click(function(){
@@ -92,7 +92,7 @@ function initTaskContentEvents(){
     var taskId = $(this).attr("attr-id");
     var task = taskListView.getItemById(taskId);
 
-    showTaskPopup($("#header_task_title").text(), taskId, task.getTitle(), task.getContent(), task.isFinished());
+    showTaskEditView($("#header_task_title").text(), taskId, task.getTitle(), task.getContent(), task.isFinished());
   })
 
   $("#task_list").on("click", ".task_delete_link", function(){
@@ -176,6 +176,8 @@ function initClickEvents(){
         taskListView.notifyDataSetChanged();
       });
     }
+
+    translateToTaskContent();
   });
 
   $("#plan_save_btn").click(function(){
@@ -185,6 +187,10 @@ function initClickEvents(){
       var keyword = $("#search_keyword").val();
       queryPlanData(date, keyword);
     });
+  });
+
+  $("#task_cancel_btn").click(function(){
+    translateToTaskContent();
   });
 
   $("#task_status_checkbox").checkbox();
@@ -277,13 +283,16 @@ function queryTaskData(planId){
 }
 
 /**
-** 显示新建或编辑任务弹出框
+** 显示新建或编辑任务界面
 ** @param header 计划标题
 ** @param taskId 任务id
 ** @param title 任务title
 ** @param content 任务内容
 */
-function showTaskPopup(header, taskId, title, content, isFinished) {
+function showTaskEditView(header, taskId, title, content, isFinished) {
+  translateToEditTask();
+  initializeEditorIfNeeded();
+
   if(header != null) {
     $("#task_header_name").text(header);
   }
@@ -313,28 +322,34 @@ function showTaskPopup(header, taskId, title, content, isFinished) {
       $("#task_status_checkbox").removeClass("checked");
     }
   }
-
-  $("#task_modal").modal('setting', 'closable', false).modal('show');
-
-  initializeEditorIfNeeded();
 }
 
 function translateToAboutContent(){
   $("#about_container").css("display", "block");
   $("#task_container").css("display", "none");
   $("#task_view_container").css("display", "none");
+  $("#task_edit_container").css("display", "none");
 }
 
 function translateToTaskContent(){
   $("#about_container").css("display", "none");
   $("#task_container").css("display", "block");
   $("#task_view_container").css("display", "none");
+  $("#task_edit_container").css("display", "none");
 }
 
 function translateToViewTask() {
   $("#about_container").css("display", "none");
   $("#task_container").css("display", "none");
   $("#task_view_container").css("display", "block");
+  $("#task_edit_container").css("display", "none");
+}
+
+function translateToEditTask(){
+  $("#about_container").css("display", "none");
+  $("#task_container").css("display", "none");
+  $("#task_view_container").css("display", "none");
+  $("#task_edit_container").css("display", "block");
 }
 
 function deleteAlertDialog(title, content, type, callback) {
@@ -382,7 +397,7 @@ function attachContextEvent(childSelector, type, parentSelector) {
         action: function(e, currentContextSelector){
           if (currentContextSelector != undefined) {
             var planTitle = currentContextSelector.find(".header:first-child").text();
-            showTaskPopup(planTitle, currentContextSelector.attr("attr-id"));
+            showTaskEditView(planTitle, currentContextSelector.attr("attr-id"));
           }
   			}
       },
