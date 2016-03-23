@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="./css/sweet-alert.css" />
 <link rel="stylesheet" type="text/css" href="./css/context.standalone.css" />
 
-<link rel="stylesheet" type="text/css" href="simditor/styles/simditor.css" />
 <script>
   window.$ = window.jQuery = require("jquery");
   window.echarts = require("./js/echarts.js");
@@ -32,10 +31,7 @@
 <script type="text/javascript" src="./js/model/task.js"></script>
 <script type="text/JavaScript" src="./js/jquery.mousewheel.js"></script>
 
-<script type="text/javascript" src="simditor/scripts/module.js"></script>
-<script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="simditor/scripts/simditor.js"></script>
+<script type="text/JavaScript" src="./tinymce/tinymce.min.js"></script>
 <style>
   *{
     font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -127,38 +123,38 @@
     <div class="extra content"><a href="#" id="task_view_back_btn"><i class="angle left icon"></i>返回</a></div>
     </div>
   </div>
-</div>
-<div style="float:left;width:68%;height:100%;text-align:center;padding-bottom:50px;border-left:solid 1px #EEE;margin-left:5px;" id="about_container">
-  <p style="margin-top:35%;font-size:18px;">菜单或者计划栏右键点击可以新建计划，快来试试吧 :)</p>
-</div>
-<div style="float:left; width:70%;text-align:center;padding-bottom:50px;display:none;" id="task_edit_container">
-  <div class="ui card" style="width:80%;margin:auto;text-align:left;">
-  <div class="ui header" id="task_header_name">
+  <div style="float:left;width:68%;height:100%;text-align:center;padding-bottom:50px;border-left:solid 1px #EEE;margin-left:5px;" id="about_container">
+    <p style="margin-top:35%;font-size:18px;">菜单或者计划栏右键点击可以新建计划，快来试试吧 :)</p>
   </div>
-  <div class="ui content">
-    <div class="ui form">
-      <div class="field" style="margin-top:10px;">
-        <h4 class="ui header">任务标题</h4>
-        <input class="dividing" type="text" id="task_title"/>
+  <div style="float:left; width:70%;text-align:center;padding-bottom:50px;display:none;" id="task_edit_container">
+    <div class="ui card" style="width:90%;margin:auto;text-align:left;padding:10px;">
+      <div class="ui header" id="task_header_name">
       </div>
-      <div class="field" style="margin-top:10px;">
-        <h4 class="ui header">任务内容</h4>
-        <textarea autofocus id="task_content"></textarea>
-      </div>
-      <div class="field" style="margin-top:10px;width:100%;">
-          <div class="ui checkbox" id="task_status_checkbox">
-            <input class="hidden" tabindex="0" name="contact-me" type="checkbox">
-            <label>已完成</label>
+      <div class="ui content">
+        <div class="ui form">
+          <div class="field" style="margin-top:10px;">
+            <h4 class="ui header">任务标题</h4>
+            <input class="dividing" type="text" id="task_title"/>
           </div>
+          <div class="field" style="margin-top:10px;">
+            <h4 class="ui header">任务内容</h4>
+            <textarea autofocus id="task_content"></textarea>
+          </div>
+          <div class="field" style="margin-top:10px;width:100%;">
+              <div class="ui checkbox" id="task_status_checkbox">
+                <input class="hidden" tabindex="0" name="contact-me" type="checkbox">
+                <label>已完成</label>
+              </div>
+          </div>
+        </div>
       </div>
+      <div class="actions">
+        <div class="ui negative button" id="task_cancel_btn">取消</div>
+        <div class="ui positive right labeled icon button" id="task_save_btn">保存 <i class="checkmark icon"></i> </div>
+      </div>
+      <input style="display:none;" id="task_id_input" value="" />
     </div>
   </div>
-  <div class="actions">
-    <div class="ui negative button" id="task_cancel_btn">取消</div>
-    <div class="ui positive right labeled icon button" id="task_save_btn">保存 <i class="checkmark icon"></i> </div>
-  </div>
-  <input style="display:none;" id="task_id_input" value="" />
-</div>
 </div>
 <div class="ui modal" id="plan_modal">
   <div class="content">

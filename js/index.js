@@ -419,30 +419,20 @@ function attachContextEvent(childSelector, type, parentSelector) {
   }
 }
 
-var editor = null;
+var isInitEditor = false;
 //初始化富文本编辑器
 function initializeEditorIfNeeded() {
-  if (editor == null) {
-    Simditor.locale = 'zh_cn';
-    var toolbar = ['title', 'bold', 'italic', 'underline', 'strikethrough',
-    'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|',
-    'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'];
-    var editor = new Simditor({
-      textarea: $('#task_content'),
-      placeholder: '这里输入文字...',
-      toolbar: toolbar,
-      pasteImage: true,
-      defaultImage: 'assets/images/image.png',
-      upload: location.search === '?upload' ? {
-        url: '/upload'
-      } : false
-    });
-    // $preview = $('#preview');
-    // if ($preview.length > 0) {
-    //   return editor.on('valuechanged', function(e) {
-    //     return $preview.html(editor.getValue());
-    //   });
-    // }
+  if (!isInitEditor) {
+    tinymce.init({
+      selector: '#task_content',
+      plugins: [
+         "advlist autolink link image lists charmap preview hr pagebreak",
+         "searchreplace fullscreen insertdatetime nonbreaking",
+         "save contextmenu directionality emoticons paste textcolor"
+       ],
+     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify" +
+     "| bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons"
+      });
   }
 }
 
