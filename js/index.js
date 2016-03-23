@@ -18,8 +18,16 @@ $(document).ready(function(){
 //初始化任务栏的计划标题事件
 function initTaskHeaderEvent(){
   $("#header_title_btn").click(function(){
-    $("#header_task_title").css("display", "none");
-    $("#header_title_edit").css("display", "inline-flex");
+    var value = $("#header_title_label").text();
+    if (value != "取消编辑") {
+      $("#header_title_label").text("取消编辑");
+      $("#header_task_title").css("display", "none");
+      $("#header_title_edit").css("display", "inline-flex");
+    } else {
+      $("#header_title_label").text("编辑标题");
+      $("#header_task_title").css("display", "inline");
+      $("#header_title_edit").css("display", "none");
+    }
   });
 
   $("#save_title_btn").click(function(){
