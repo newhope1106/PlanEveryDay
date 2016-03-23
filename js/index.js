@@ -74,6 +74,20 @@ function initTaskHeaderEvent(){
 
 //初始化任务的编辑和删除事件
 function initTaskContentEvents(){
+  $("#task_list").on("click", ".task_view_link", function(){
+    var taskId = $(this).attr("attr-id");
+    var task = taskListView.getItemById(taskId);
+    translateToViewTask();
+    $("#task_view_title").text(task.getTitle());
+    $("#task_view_status").html("最近更新时间:" + task.getLastUpdateDate()
+    + "&nbsp;&nbsp;" + (task.isFinished()?"完成":"未完成"));
+    $("#task_view_content").html(task.getContent());
+  })
+
+  $("#task_view_back_btn").on("click", function(){
+    translateToTaskContent();
+  });
+
   $("#task_list").on("click", ".task_edit_link", function(){
     var taskId = $(this).attr("attr-id");
     var task = taskListView.getItemById(taskId);
@@ -306,13 +320,21 @@ function showTaskPopup(header, taskId, title, content, isFinished) {
 }
 
 function translateToAboutContent(){
-  $("#task_container").css("display", "none");
   $("#about_container").css("display", "block");
+  $("#task_container").css("display", "none");
+  $("#task_view_container").css("display", "none");
 }
 
 function translateToTaskContent(){
   $("#about_container").css("display", "none");
   $("#task_container").css("display", "block");
+  $("#task_view_container").css("display", "none");
+}
+
+function translateToViewTask() {
+  $("#about_container").css("display", "none");
+  $("#task_container").css("display", "none");
+  $("#task_view_container").css("display", "block");
 }
 
 function deleteAlertDialog(title, content, type, callback) {
