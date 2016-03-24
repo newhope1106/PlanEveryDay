@@ -153,7 +153,7 @@ function initClickEvents(){
 
   $("#task_save_btn").click(function(){
     var taskId = $("#task_id_input").val();
-    var status = $("#task_status_checkbox").hasClass("checked")?1:0;
+    var status = $("#task_status_checkbox").checkbox("is checked")?1:0;
     var task = null;
     var taskTitle = $("#task_title").val();
     if (taskTitle==null || taskTitle == "") {
@@ -321,9 +321,9 @@ function showTaskEditView(header, taskId, title, content, isFinished) {
 
   if(isFinished != null) {
     if (isFinished) {
-      $("#task_status_checkbox").addClass("checked");
+      $("#task_status_checkbox").checkbox("check");
     } else {
-      $("#task_status_checkbox").removeClass("checked");
+      $("#task_status_checkbox").checkbox("uncheck");
     }
   }
 }
