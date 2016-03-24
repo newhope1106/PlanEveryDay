@@ -13,6 +13,8 @@ $(document).ready(function(){
   initClickEvents();
 
   queryPlanData();
+
+  initializeEditorIfNeeded();
 });
 
 //初始化任务栏的计划标题事件
@@ -158,8 +160,9 @@ function initClickEvents(){
       showToast("任务标题不能为空");
       return ;
     }
+
     if(taskId == null || taskId == "") {
-      task = new Task(taskTitle , $("#task_content").val(),
+      task = new Task(taskTitle , getTaskEditContent("task_content"),
           $("#task_id_input").val(), 0, null, null, $("#header_task_title").attr("attr-plan-id"), status);
       DBManager.saveTask(task, function(){
         if(taskListView != null) {
@@ -169,7 +172,7 @@ function initClickEvents(){
     } else {
       task = taskListView.getItemById(taskId);
       task.updateTitle($("#task_title").val());
-      task.updateContent($("#task_content").val());
+      task.updateContent(getTaskEditContent("task_content"));
       task.updateStatus(status);
 
       DBManager.saveTask(task, function(){
@@ -291,7 +294,6 @@ function queryTaskData(planId){
 */
 function showTaskEditView(header, taskId, title, content, isFinished) {
   translateToEditTask();
-  initializeEditorIfNeeded();
 
   if(header != null) {
     $("#task_header_name").text(header);
@@ -304,9 +306,11 @@ function showTaskEditView(header, taskId, title, content, isFinished) {
   }
 
   if (content != null) {
-    $("#task_content").val(content);
+    //$("#task_content").val(content);
+    tinymce.get("task_content").setContent(content);
   } else {
-    $("#task_content").val("");
+    //$("#task_content").val("");
+    tinymce.get("task_content").setContent("");
   }
 
   if (taskId != null && taskId != "") {
@@ -322,6 +326,10 @@ function showTaskEditView(header, taskId, title, content, isFinished) {
       $("#task_status_checkbox").removeClass("checked");
     }
   }
+}
+
+function getTaskEditContent(name){
+  return tinymce.get(name).getContent();
 }
 
 function translateToAboutContent(){
