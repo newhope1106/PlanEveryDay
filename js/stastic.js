@@ -34,7 +34,7 @@ function showStasticInfo() {
           xAxis: [
               {
                   type : 'category',
-                  data:['计划总计', '任务总计', '已完成任务总计'],
+                  data:['数据统计'],
                   axisLabel :{
                     show:true,
                     interval:0,
@@ -50,7 +50,7 @@ function showStasticInfo() {
                   name : '单位/个',
               }
           ],
-          barWidth:48,
+          barWidth:40,
           series : [
               {
                   name: '计划总计',
