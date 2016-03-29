@@ -23,12 +23,12 @@ function initTaskHeaderEvent(){
     var value = $("#header_title_label").text();
     if (value != "取消编辑") {
       $("#header_title_label").text("取消编辑");
-      $("#header_task_title").css("display", "none");
-      $("#header_title_edit").css("display", "inline-flex");
+      $("#header_task_title").css("display", "none").removeClass("translate_ani");
+      $("#header_title_edit").css("display", "inline-flex").addClass("translate_ani");
     } else {
       $("#header_title_label").text("编辑标题");
-      $("#header_task_title").css("display", "inline");
-      $("#header_title_edit").css("display", "none");
+      $("#header_task_title").css("display", "inline").addClass("translate_ani");
+      $("#header_title_edit").css("display", "none").removeClass("translate_ani");
     }
   });
 
