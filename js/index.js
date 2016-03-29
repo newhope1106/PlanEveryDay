@@ -333,31 +333,31 @@ function getTaskEditContent(name){
 }
 
 function translateToAboutContent(){
-  $("#about_container").css("display", "block");
-  $("#task_container").css("display", "none");
-  $("#task_view_container").css("display", "none");
-  $("#task_edit_container").css("display", "none");
+  $("#about_container").css("display", "block").addClass("translate_ani");
+  $("#task_container").css("display", "none").removeClass("translate_ani");
+  $("#task_view_container").css("display", "none").removeClass("translate_ani");
+  $("#task_edit_container").css("display", "none").removeClass("translate_ani");
 }
 
 function translateToTaskContent(){
-  $("#about_container").css("display", "none");
-  $("#task_container").css("display", "block");
-  $("#task_view_container").css("display", "none");
-  $("#task_edit_container").css("display", "none");
+  $("#about_container").css("display", "none").removeClass("translate_ani");
+  $("#task_container").css("display", "block").addClass("translate_ani");
+  $("#task_view_container").css("display", "none").removeClass("translate_ani");
+  $("#task_edit_container").css("display", "none").removeClass("translate_ani");
 }
 
 function translateToViewTask() {
-  $("#about_container").css("display", "none");
-  $("#task_container").css("display", "none");
-  $("#task_view_container").css("display", "block");
-  $("#task_edit_container").css("display", "none");
+  $("#about_container").css("display", "none").removeClass("translate_ani");
+  $("#task_container").css("display", "none").removeClass("translate_ani");
+  $("#task_view_container").css("display", "block").addClass("translate_ani");
+  $("#task_edit_container").css("display", "none").removeClass("translate_ani");
 }
 
 function translateToEditTask(){
-  $("#about_container").css("display", "none");
-  $("#task_container").css("display", "none");
-  $("#task_view_container").css("display", "none");
-  $("#task_edit_container").css("display", "block");
+  $("#about_container").css("display", "none").removeClass("translate_ani");
+  $("#task_container").css("display", "none").removeClass("translate_ani");
+  $("#task_view_container").css("display", "none").removeClass("translate_ani");
+  $("#task_edit_container").css("display", "block").addClass("translate_ani");
 }
 
 function deleteAlertDialog(title, content, type, callback) {
